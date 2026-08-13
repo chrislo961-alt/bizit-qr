@@ -1,0 +1,9 @@
+
+:root{
+  --sbk-brand:#2563eb;
+  --sbk-brand-2:#06b6d4;
+  --sbk-navy:#0f172a;
+  --sbk-soft:#f3f4f6;
+}
+.sbk-brandmark{font-weight:950;letter-spacing:-.04em}
+.sbk-brandmark .biz{color:var(--sbk-brand)}
