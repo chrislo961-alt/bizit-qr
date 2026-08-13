@@ -7,3 +7,19 @@ main{min-height:65vh}.pagehero{text-align:center;padding:72px 0 42px;background:
 .contact{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:25px;margin-top:25px}.small{font-size:13px;color:var(--muted)}
 footer{background:#101a3d;color:#dfe5f7;padding:42px 0 26px}.footergrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}.footerbrand p{color:#9ba7c5;max-width:380px;line-height:1.65}.footercol strong{display:block;margin-bottom:12px}.footercol a{display:block;color:#b7c0d8;font-size:13px;margin:9px 0}.bottom{border-top:1px solid #293354;margin-top:28px;padding-top:20px;color:#8996b7;font-size:12px;display:flex;justify-content:space-between;gap:15px}
 @media(max-width:760px){.links{display:none}.footergrid{grid-template-columns:1fr}.bottom{flex-direction:column}.pagehero{padding-top:50px}}
+
+
+/* SoloBizKit shared navigation/footer */
+.sbk-global-header{background:rgba(255,255,255,.96);border-bottom:1px solid #e7eaf2;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.sbk-global-nav{width:min(1120px,calc(100% - 32px));height:70px;margin:auto;display:flex;align-items:center;gap:26px}
+.sbk-global-brand{font-size:22px;font-weight:950;color:#12204a;text-decoration:none;letter-spacing:-.02em}.sbk-global-brand span{color:#6547e8}
+.sbk-global-links{display:flex;align-items:center;gap:22px;margin-left:auto}.sbk-global-links a{font-size:14px;color:#44506c;text-decoration:none}.sbk-global-links a:hover{color:#6547e8}
+.sbk-global-tools{border:1px solid #e7eaf2;background:#fff;color:#12204a;padding:10px 14px;border-radius:11px;font-weight:850;text-decoration:none;font-size:14px}
+.sbk-global-footer{background:#101a3d;color:#dfe5f7;padding:44px 0 24px;margin-top:0}
+.sbk-global-footer-inner{width:min(1120px,calc(100% - 32px));margin:auto}
+.sbk-global-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px}
+.sbk-global-footer .sbk-global-brand{color:#fff}.sbk-global-footer p{max-width:390px;color:#9ba7c5;line-height:1.65;font-size:14px}
+.sbk-global-footer strong{display:block;margin-bottom:12px}.sbk-global-footer a:not(.sbk-global-brand){display:block;color:#b7c0d8;text-decoration:none;font-size:13px;margin:9px 0}
+.sbk-global-footer a:hover{color:#fff}
+.sbk-global-bottom{border-top:1px solid #293354;margin-top:28px;padding-top:20px;color:#8996b7;font-size:12px;display:flex;justify-content:space-between;gap:14px}
+@media(max-width:780px){.sbk-global-links{display:none}.sbk-global-footer-grid{grid-template-columns:1fr}.sbk-global-bottom{flex-direction:column}.sbk-global-nav{height:64px}}
