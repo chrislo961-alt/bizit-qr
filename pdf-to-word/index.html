@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free PDF to Word Converter – Multiple PDFs | SoloBizKit</title>
+<meta name="description" content="Convert one or multiple PDF files to editable Word documents in your browser. Drag and drop PDFs, convert individually or combine them into one DOCX. Free, no sign up.">
+<link rel="canonical" href="https://solobizkit.it.com/pdf-to-word/">
+<meta property="og:title" content="Free PDF to Word Converter | SoloBizKit">
+<meta property="og:description" content="Convert one or multiple PDFs to editable Word documents. Free, simple and no sign up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://solobizkit.it.com/pdf-to-word/">
+<meta property="og:image" content="https://solobizkit.it.com/assets/images/solobizkit-social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/global-shell.css">
+<link rel="stylesheet" href="/performance.css">
+<link rel="stylesheet" href="/brand.css">
+<link rel="stylesheet" href="/theme-warm-green.css">
+<link rel="stylesheet" href="/analytics-consent.css">
+<script src="/analytics.js" defer></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs" type="module"></script>
+<script src="https://unpkg.com/docx@9.0.3/dist/index.iife.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+
+<style>
+:root{
+  --bg:#F7F5F0;--card:#fff;--text:#252823;--muted:#6F746C;
+  --green:#3F6B55;--green-dark:#315442;--soft:#E8F0EA;--border:#E3E1DA;
+  --danger:#A14D44
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}
+.wrap{width:min(1020px,calc(100% - 30px));margin:auto}
+.hero{text-align:center;padding:58px 0 26px}
+.hero .eyebrow{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.hero h1{font-size:clamp(40px,6vw,62px);letter-spacing:-.045em;line-height:1.02;margin:12px auto 13px}
+.hero p{max-width:720px;margin:auto;color:var(--muted);font-size:17px;line-height:1.65}
+
+.converter{padding:18px 0 70px}
+.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:0 12px 34px rgba(37,40,35,.05)}
+.dropzone{border:2px dashed #CFCFC7;border-radius:18px;min-height:320px;display:grid;place-items:center;text-align:center;padding:34px;background:#FCFBF8;transition:.15s}
+.dropzone.dragover{border-color:var(--green);background:#F0F5F1}
+.drop-icon{width:68px;height:68px;margin:0 auto 17px;border-radius:16px;background:var(--soft);display:grid;place-items:center;font-size:32px;color:var(--green)}
+.dropzone h2{font-size:26px;margin:0 0 8px;letter-spacing:-.02em}
+.dropzone p{margin:0 0 18px;color:var(--muted)}
+.choose{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border:0;border-radius:11px;padding:12px 16px;font-weight:900;cursor:pointer}
+.choose:hover{background:var(--green-dark)}
+#fileInput{display:none}
+.subnote{font-size:11px;color:var(--muted);margin-top:12px}
+
+.queue{margin-top:18px;display:none}
+.queue.show{display:block}
+.queue-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}
+.queue-head h3{margin:0;font-size:16px}
+.queue-head button{border:0;background:transparent;color:var(--danger);font-size:12px;font-weight:800;cursor:pointer}
+.file-list{display:grid;gap:9px}
+.file-row{border:1px solid var(--border);border-radius:13px;padding:12px 13px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:#fff}
+.file-main{display:flex;align-items:center;gap:11px;min-width:0}
+.file-icon{width:38px;height:38px;border-radius:10px;background:#F1EEE8;display:grid;place-items:center;font-weight:900;color:#8A5B50;flex:0 0 auto}
+.file-info{min-width:0}
+.file-name{font-weight:850;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-meta{font-size:11px;color:var(--muted);margin-top:3px}
+.remove{border:0;background:#F6F3EE;color:#756C63;border-radius:9px;padding:7px 9px;cursor:pointer;font-size:11px}
+
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.option{border:1px solid var(--border);border-radius:14px;padding:14px;background:#FBFAF7}
+.option label{display:flex;gap:9px;align-items:flex-start;font-size:13px;font-weight:800;cursor:pointer}
+.option input{margin-top:3px}
+.option span{display:block;font-size:11px;color:var(--muted);font-weight:500;line-height:1.45;margin-top:3px}
+
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.btn{border:1px solid var(--border);border-radius:12px;padding:13px 15px;font-weight:900;cursor:pointer;background:#fff;color:var(--text)}
+.btn.primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.progress-wrap{margin-top:18px;display:none}
+.progress-wrap.show{display:block}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:7px}
+.progress{height:9px;border-radius:99px;background:#EEECE7;overflow:hidden}
+.progress-bar{height:100%;width:0;background:var(--green);transition:width .2s}
+
+.results{margin-top:20px;display:none}
+.results.show{display:block}
+.result-item{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid #D6E3DA;background:#F4F8F5;border-radius:12px;padding:12px;margin-top:8px}
+.result-item strong{font-size:13px}
+.result-item small{display:block;color:var(--muted);margin-top:2px}
+.result-download{border:0;background:var(--green);color:#fff;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:11px}
+.result-error{border-color:#E6C7C2;background:#FFF6F4}
+
+.info{padding:55px 0;background:#fff;border-top:1px solid var(--border)}
+.info-inner{max-width:800px}
+.info h2{font-size:30px}
+.info h3{font-size:17px;margin-top:28px}
+.info p,.info li{color:var(--muted);line-height:1.72}
+.warning{background:#FFF8E8;border:1px solid #E7D7AE;border-radius:13px;padding:13px 14px;font-size:12px;color:#6D5D34;line-height:1.5;margin-top:18px}
+
+@media(max-width:700px){
+  .dropzone{min-height:280px}.options,.actions{grid-template-columns:1fr}
+  .file-row{grid-template-columns:1fr auto}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"SoloBizKit PDF to Word Converter","url":"https://solobizkit.it.com/pdf-to-word/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Convert one or multiple PDF files to editable Word documents in the browser."}
+</script>
+</head>
+<body>
+<header class="sbk-global-header">
+  <div class="sbk-global-nav">
+    <a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a>
+    <nav class="sbk-global-links">
+      <a href="/tools/">All Tools</a>
+      <a href="/qr-code-generator/">QR Code</a>
+      <a href="/invoice-generator/">Invoice</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Free · no sign up · multiple PDFs</div>
+    <h1>PDF to Word</h1>
+    <p>Drop one or more PDF files below. Convert them to editable Word documents individually, or combine several PDFs into one Word file.</p>
+  </div>
+</section>
+
+<section class="converter">
+  <div class="wrap">
+    <div class="card">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload PDF files">
+        <div>
+          <div class="drop-icon">⇧</div>
+          <h2>Drag PDF files here</h2>
+          <p>or choose files from your device</p>
+          <button class="choose" id="chooseBtn" type="button">Choose PDF files</button>
+          <input id="fileInput" type="file" accept="application/pdf,.pdf" multiple>
+          <div class="subnote">You can select more than one PDF at the same time.</div>
+        </div>
+      </div>
+
+      <div class="queue" id="queue">
+        <div class="queue-head">
+          <h3 id="queueTitle">Files ready</h3>
+          <button id="clearAll" type="button">Remove all</button>
+        </div>
+        <div class="file-list" id="fileList"></div>
+
+        <div class="options">
+          <div class="option">
+            <label><input type="radio" name="mode" value="separate" checked>
+              <div>Separate Word files
+                <span>Each PDF becomes its own .docx file.</span>
+              </div>
+            </label>
+          </div>
+          <div class="option">
+            <label><input type="radio" name="mode" value="combined">
+              <div>Combine into one Word file
+                <span>All selected PDFs are added to one document in the same order.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="addMore" type="button">+ Add more PDFs</button>
+          <button class="btn primary" id="convert" type="button">Convert to Word</button>
+        </div>
+
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-label"><span id="progressText">Preparing…</span><span id="progressPct">0%</span></div>
+          <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        </div>
+
+        <div class="results" id="results">
+          <h3 style="margin:0 0 8px">Your Word files</h3>
+          <div id="resultList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="wrap info-inner">
+    <h2>Convert several PDFs at once</h2>
+    <p>You can add multiple PDF files in one upload. Choose whether you want one Word document per PDF or a single combined Word document.</p>
+
+    <h3>What is converted?</h3>
+    <p>This browser-based converter extracts selectable text from each PDF page and creates an editable Word document. Page breaks are preserved between PDF pages.</p>
+
+    <div class="warning"><strong>Important:</strong> PDF and Word are very different formats. Complex layouts, scanned pages, forms, tables, columns and embedded graphics may not reproduce exactly. Image-only scanned PDFs need OCR, which this version does not perform.</div>
+
+    <h3>Privacy</h3>
+    <p>The conversion is designed to happen in your browser. SoloBizKit does not intentionally upload your document contents to a SoloBizKit server.</p>
+  </div>
+</section>
+</main>
+
+<footer class="sbk-global-footer">
+  <div class="sbk-global-footer-inner">
+    <div class="sbk-global-bottom">
+      <span>© 2026 SoloBizKit</span>
+      <span><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/contact/">Contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.min.mjs";
+
+const $ = id => document.getElementById(id);
+let files = [];
+let generatedUrls = [];
+
+function formatBytes(bytes){
+  if(bytes < 1024) return bytes + " B";
+  if(bytes < 1048576) return (bytes/1024).toFixed(1) + " KB";
+  return (bytes/1048576).toFixed(1) + " MB";
+}
+function cleanName(name){
+  return name.replace(/\.pdf$/i,"").replace(/[^\w\- ]+/g,"").trim() || "converted";
+}
+function refresh(){
+  const queue=$("queue"),list=$("fileList");
+  queue.classList.toggle("show",files.length>0);
+  $("queueTitle").textContent = files.length===1 ? "1 PDF ready" : files.length+" PDFs ready";
+  list.innerHTML="";
+  files.forEach((file,i)=>{
+    const row=document.createElement("div");
+    row.className="file-row";
+    row.innerHTML=`<div class="file-main"><div class="file-icon">PDF</div><div class="file-info"><div class="file-name"></div><div class="file-meta">${formatBytes(file.size)}</div></div></div><button class="remove" type="button">Remove</button>`;
+    row.querySelector(".file-name").textContent=file.name;
+    row.querySelector(".remove").onclick=()=>{files.splice(i,1);refresh()};
+    list.appendChild(row);
+  });
+}
+function addFiles(newFiles){
+  const pdfs=[...newFiles].filter(f=>f.type==="application/pdf" || /\.pdf$/i.test(f.name));
+  for(const f of pdfs){
+    const duplicate=files.some(x=>x.name===f.name && x.size===f.size && x.lastModified===f.lastModified);
+    if(!duplicate) files.push(f);
+  }
+  refresh();
+}
+$("chooseBtn").onclick=()=>$("fileInput").click();
+$("addMore").onclick=()=>$("fileInput").click();
+$("fileInput").onchange=e=>{addFiles(e.target.files);e.target.value=""};
+$("clearAll").onclick=()=>{files=[];refresh();$("results").classList.remove("show")};
+
+const dz=$("dropzone");
+["dragenter","dragover"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add("dragover")}));
+["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove("dragover")}));
+dz.addEventListener("drop",e=>addFiles(e.dataTransfer.files));
+dz.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();$("fileInput").click()}});
+
+function setProgress(done,total,text){
+  const pct=total ? Math.round(done/total*100) : 0;
+  $("progressWrap").classList.add("show");
+  $("progressBar").style.width=pct+"%";
+  $("progressPct").textContent=pct+"%";
+  $("progressText").textContent=text || "Converting…";
+}
+async function extractPdf(file, progressCb){
+  const data=new Uint8Array(await file.arrayBuffer());
+  const pdf=await pdfjsLib.getDocument({data}).promise;
+  const pages=[];
+  for(let n=1;n<=pdf.numPages;n++){
+    const page=await pdf.getPage(n);
+    const content=await page.getTextContent();
+    const items=content.items || [];
+    let lines=[],current="",lastY=null;
+    for(const item of items){
+      const str=(item.str||"").trim();
+      if(!str) continue;
+      const y=item.transform ? Math.round(item.transform[5]) : null;
+      if(lastY!==null && y!==null && Math.abs(y-lastY)>4){
+        if(current.trim()) lines.push(current.trim());
+        current=str;
+      } else {
+        current += (current ? " " : "") + str;
+      }
+      lastY=y;
+    }
+    if(current.trim()) lines.push(current.trim());
+    pages.push(lines);
+    progressCb?.(n,pdf.numPages);
+  }
+  return pages;
+}
+
+function docFromPdfs(pdfData, combined){
+  const {Document,Packer,Paragraph,TextRun,HeadingLevel,PageBreak}=window.docx;
+  const children=[];
+  pdfData.forEach((entry,fileIndex)=>{
+    if(combined && pdfData.length>1){
+      children.push(new Paragraph({text:entry.name,heading:HeadingLevel.HEADING_1}));
+    }
+    entry.pages.forEach((lines,pageIndex)=>{
+      for(const line of lines){
+        children.push(new Paragraph({children:[new TextRun({text:line})],spacing:{after:120}}));
+      }
+      if(pageIndex<entry.pages.length-1){
+        children.push(new Paragraph({children:[new PageBreak()]}));
+      }
+    });
+    if(combined && fileIndex<pdfData.length-1){
+      children.push(new Paragraph({children:[new PageBreak()]}));
+    }
+  });
+  return new Document({sections:[{properties:{},children}]});
+}
+async function blobFromDoc(doc){
+  return await window.docx.Packer.toBlob(doc);
+}
+function clearGenerated(){
+  generatedUrls.forEach(u=>URL.revokeObjectURL(u));
+  generatedUrls=[];
+}
+function addResult(name,blob,error){
+  const row=document.createElement("div");
+  row.className="result-item"+(error?" result-error":"");
+  if(error){
+    row.innerHTML=`<div><strong></strong><small>Could not convert this PDF.</small></div>`;
+    row.querySelector("strong").textContent=name;
+  }else{
+    const url=URL.createObjectURL(blob);generatedUrls.push(url);
+    row.innerHTML=`<div><strong></strong><small>Word document ready</small></div><button class="result-download">Download DOCX</button>`;
+    row.querySelector("strong").textContent=name;
+    row.querySelector("button").onclick=()=>{
+      const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+    };
+  }
+  $("resultList").appendChild(row);
+}
+
+$("convert").onclick=async()=>{
+  if(!files.length) return;
+  if(!window.docx){alert("The Word conversion library is still loading. Please try again in a moment.");return}
+  $("convert").disabled=true;
+  $("results").classList.remove("show");
+  $("resultList").innerHTML="";
+  clearGenerated();
+
+  const mode=document.querySelector('input[name="mode"]:checked').value;
+  const extracted=[];
+  let completedFiles=0;
+
+  for(let i=0;i<files.length;i++){
+    const file=files[i];
+    try{
+      setProgress(completedFiles,files.length,`Reading ${file.name}…`);
+      const pages=await extractPdf(file,(page,totalPages)=>{
+        const base=i/files.length;
+        const part=(page/totalPages)/files.length;
+        const pct=Math.round((base+part)*100);
+        $("progressBar").style.width=pct+"%";
+        $("progressPct").textContent=pct+"%";
+        $("progressText").textContent=`Reading ${file.name} — page ${page} of ${totalPages}`;
+      });
+      extracted.push({name:cleanName(file.name),pages,file});
+      completedFiles++;
+    }catch(err){
+      console.error(err);
+      if(mode==="separate") addResult(cleanName(file.name)+".docx",null,true);
+    }
+  }
+
+  try{
+    if(mode==="combined"){
+      if(extracted.length){
+        setProgress(files.length,files.length,"Creating combined Word document…");
+        const doc=docFromPdfs(extracted,true);
+        const blob=await blobFromDoc(doc);
+        addResult("combined-pdfs.docx",blob,false);
+      }
+    }else{
+      let n=0;
+      for(const entry of extracted){
+        setProgress(files.length,files.length,`Creating ${entry.name}.docx…`);
+        const doc=docFromPdfs([entry],false);
+        const blob=await blobFromDoc(doc);
+        addResult(entry.name+".docx",blob,false);
+        n++;
+      }
+    }
+    $("results").classList.add("show");
+    setProgress(files.length,files.length,"Done");
+  }catch(err){
+    console.error(err);
+    alert("Something went wrong while creating the Word document.");
+  }
+  $("convert").disabled=false;
+};
+</script>
+</body>
+</html>
