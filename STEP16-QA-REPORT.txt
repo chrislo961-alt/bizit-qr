@@ -1,0 +1,7 @@
+SOLOBIZKIT STEP 16 STATIC QA
+
+HTML pages patched: 37
+Internal root-relative links checked: 683
+Potential missing internal targets: 0
+
+No missing root-relative internal targets were found in this generated site snapshot.

@@ -1,0 +1,16 @@
+{
+  "name": "SoloBizKit",
+  "short_name": "SoloBizKit",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfcff",
+  "theme_color": "#6547e8",
+  "description": "Free tools for freelancers and small businesses.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
