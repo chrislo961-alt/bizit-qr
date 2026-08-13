@@ -1,0 +1,19 @@
+SoloBizKit Step 12 – Internal Linking
+
+NEW PAGE:
+https://solobizkit.it.com/tools/
+
+Recommended permanent navigation:
+Home | All Tools | About
+
+Core hub relationships:
+QR pages -> /qr-code-generator/ and /tools/
+Business-name pages -> /business-name-generator/ and /tools/
+Invoice pages -> /invoice-generator/ and /tools/
+Rate pages -> /hourly-rate-calculator/ and /tools/
+Margin pages -> /profit-margin-calculator/ and /tools/
+Paycheck -> /paycheck-calculator/ and /tools/
+
+The long-tail pages from Steps 8–11 already link laterally within their topic and back to their core tool. The /tools/ directory now creates a crawlable HTML hub pointing to every tool/content page.
+
+Do not create dozens of near-identical pages just to increase URL count. Add new pages when there is a distinct user intent and useful functionality/content.
