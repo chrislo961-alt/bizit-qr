@@ -1,24 +1,23 @@
-# SoloBizKit
+# SoloBizKit – Site Polish Patch
 
-Free tools for freelancers, solopreneurs and small business owners.
+Upload these files to the ROOT of the existing GitHub repository.
 
-## Current tools
-- QR Code Generator V2 (`/qr-code-generator/`)
-- Business Name Generator
-- Paycheck Calculator
+This patch:
+- Replaces the homepage with links to the clean tool URLs
+- Updates sitemap.xml
+- Updates robots.txt
+- Turns old .html tool URLs into redirects
+- Adds a simple 404 page
 
-## QR Code Generator V2
-- URL, text, email, phone and Wi-Fi payloads
-- Live preview
-- Size, margin and color controls
-- PNG and SVG downloads
-- No account required
-- FAQ + WebApplication structured data
-- Canonical URL, Open Graph metadata and SEO copy
+Important:
+Keep these existing folders in the repo:
+- /qr-code-generator/
+- /business-name-generator/
+- /paycheck-calculator/
 
-## Deploy
-This is a static HTML/CSS/JavaScript project. It works on GitHub Pages or any static host.
+Do NOT delete the folders above.
 
-For GitHub Pages, deploy the `main` branch from `/ (root)`.
-
-Custom domain: `solobizkit.it.com`
+After upload, the preferred URLs are:
+- https://solobizkit.it.com/qr-code-generator/
+- https://solobizkit.it.com/business-name-generator/
+- https://solobizkit.it.com/paycheck-calculator/
