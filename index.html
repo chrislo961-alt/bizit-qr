@@ -1,68 +1,27 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SoloBizKit – Free Tools for Freelancers & Small Businesses</title>
-<meta name="description" content="Free business tools for freelancers and small businesses. Generate QR codes, business names and estimate take-home pay — no sign up required.">
-<link rel="canonical" href="https://solobizkit.it.com/">
-<meta property="og:title" content="SoloBizKit – Free Business Tools">
-<meta property="og:description" content="Simple, free tools to help you run your solo business.">
-<meta property="og:url" content="https://solobizkit.it.com/">
-<meta property="og:type" content="website">
-<style>
-:root{--ink:#12204a;--muted:#697386;--line:#e7eaf2;--accent:#6547e8;--green:#2f9d66;--blue:#3d78d8;--bg:#fbfcff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
-a{text-decoration:none;color:inherit}.wrap{width:min(1120px,calc(100% - 32px));margin:auto}
-header{background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
-.nav{height:72px;display:flex;align-items:center;gap:28px}.brand{font-size:23px;font-weight:950}.brand span{color:var(--accent)}.navlinks{margin-left:auto;display:flex;gap:24px;color:#44506c;font-size:14px}.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:12px 17px;font-weight:850;border:1px solid var(--line);background:#fff;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.hero{text-align:center;padding:90px 0 58px;background:
-radial-gradient(circle at 20% 15%,#e8f7ee 0,transparent 27%),
-radial-gradient(circle at 80% 10%,#eeeaff 0,transparent 29%),
-radial-gradient(circle at 50% 80%,#eaf3ff 0,transparent 32%)}
-.badge{display:inline-block;color:var(--accent);background:#f1eeff;border:1px solid #ddd6ff;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-.hero h1{font-size:clamp(44px,7vw,76px);line-height:.98;letter-spacing:-.055em;max-width:880px;margin:18px auto}.hero p{max-width:690px;margin:0 auto;color:var(--muted);font-size:19px;line-height:1.65}.trust{margin-top:22px;font-size:13px;color:#59627a;font-weight:750}
-.tools{padding:70px 0}.sectionhead{text-align:center;max-width:680px;margin:0 auto 30px}.sectionhead h2{font-size:38px;margin:0 0 8px}.sectionhead p{color:var(--muted);margin:0;line-height:1.65}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 50px rgba(32,43,75,.06);display:flex;flex-direction:column;min-height:300px;transition:.2s transform,.2s box-shadow}.card:hover{transform:translateY(-4px);box-shadow:0 22px 58px rgba(32,43,75,.10)}
-.icon{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:25px;margin-bottom:18px}.qr{background:#e9f7ef}.name{background:#f0edff}.pay{background:#eaf3ff}
-.card h3{font-size:24px;margin:0 0 8px}.card p{color:var(--muted);line-height:1.65;margin:0}.features{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}.pill{font-size:11px;font-weight:800;background:#f7f8fb;border:1px solid var(--line);border-radius:999px;padding:6px 9px;color:#556077}.card .btn{margin-top:auto}
-.why{padding:70px 0;background:#fff;border-block:1px solid var(--line)}.whygrid{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.why h2{font-size:40px;margin:0 0 12px}.why p{color:var(--muted);line-height:1.75}.points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}.point{border:1px solid var(--line);border-radius:15px;padding:16px}.point strong{display:block;margin-bottom:4px}.point span{font-size:13px;color:var(--muted)}
-.next{padding:70px 0}.coming{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:22px}.coming span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;color:#59627a;font-size:13px;font-weight:750}
-footer{background:#101a3d;color:#dfe5f7;padding:34px 0}.foot{display:flex;align-items:center;justify-content:space-between;gap:20px}.foot small{color:#9ba7c5}
-@media(max-width:850px){.navlinks{display:none}.grid,.whygrid{grid-template-columns:1fr}.whygrid{gap:24px}.points{grid-template-columns:1fr}.hero{padding-top:62px}.foot{align-items:flex-start;flex-direction:column}}
-</style>
-<link rel="stylesheet" href="/global-shell.css">
-</head>
-<body>
-<header class="sbk-global-header"><div class="sbk-global-nav"><a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a><nav class="sbk-global-links"><a href="/qr-code-generator/">QR Code</a><a href="/business-name-generator/">Business Name</a><a href="/paycheck-calculator/">Paycheck</a><a href="/about/">About</a></nav><a class="sbk-global-tools" href="/#tools">All Tools</a></div></header>
-
-<section class="hero"><div class="wrap">
-<span class="badge">100% free · no sign up · no limits</span>
-<h1>Free tools to run your business.</h1>
-<p>Simple, fast tools for freelancers, creators and small businesses. Use what you need, get the result, and get back to work.</p>
-<div class="trust">No account required · Works on mobile · Built for speed</div>
-</div></section>
-
-<section class="tools" id="tools"><div class="wrap">
-<div class="sectionhead"><h2>Start with one of our free tools</h2><p>Three focused tools today. More only when they are genuinely useful.</p></div>
-<div class="grid">
-<article class="card"><div class="icon qr">▦</div><h3>QR Code Generator</h3><p>Create QR codes for links, text, email, phone numbers and Wi-Fi. Customize size, margins and colors.</p><div class="features"><span class="pill">PNG</span><span class="pill">SVG</span><span class="pill">Wi-Fi QR</span><span class="pill">No login</span></div><a class="btn primary" href="/qr-code-generator/">Create QR Code →</a></article>
-<article class="card"><div class="icon name">✦</div><h3>Business Name Generator</h3><p>Generate fresh brand-name ideas using your business description, industry, style and optional keyword.</p><div class="features"><span class="pill">6 styles</span><span class="pill">Save ideas</span><span class="pill">Generate more</span></div><a class="btn primary" href="/business-name-generator/">Generate Names →</a></article>
-<article class="card"><div class="icon pay">$</div><h3>Paycheck Calculator</h3><p>Estimate 2026 take-home pay from salary or hourly wages, including payroll taxes and deductions.</p><div class="features"><span class="pill">Salary</span><span class="pill">Hourly</span><span class="pill">2026 estimator</span></div><a class="btn primary" href="/paycheck-calculator/">Calculate Paycheck →</a></article>
-</div></div></section>
-
-<section class="why"><div class="wrap whygrid"><div><span class="badge">Why SoloBizKit?</span><h2>Useful first. Everything else second.</h2><p>We build focused business tools that work immediately. No forced accounts, no bloated dashboards and no unnecessary steps between you and the answer.</p></div><div class="points">
-<div class="point"><strong>Free to use</strong><span>The core tools work without payment.</span></div>
-<div class="point"><strong>No sign up</strong><span>Open a tool and start immediately.</span></div>
-<div class="point"><strong>Privacy-minded</strong><span>Where possible, calculations happen in your browser.</span></div>
-<div class="point"><strong>Mobile friendly</strong><span>Designed to work on phones as well as desktops.</span></div>
-</div></div></section>
-
-<section class="next"><div class="wrap sectionhead"><span class="badge">Coming later</span><h2 style="margin-top:14px">More tools, one at a time.</h2><p>We will expand SoloBizKit based on what people actually use.</p><div class="coming"><span>Invoice Generator</span><span>Profit Margin Calculator</span><span>Hourly Rate Calculator</span><span>Quote Generator</span><span>Break-even Calculator</span></div></div></section>
-
-<footer class="sbk-global-footer"><div class="sbk-global-footer-inner"><div class="sbk-global-footer-grid"><div><a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a><p>Simple, free tools for freelancers, creators and small businesses. No forced account required.</p></div><div><strong>Tools</strong><a href="/qr-code-generator/">QR Code Generator</a><a href="/business-name-generator/">Business Name Generator</a><a href="/paycheck-calculator/">Paycheck Calculator</a></div><div><strong>Company</strong><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div><div class="sbk-global-bottom"><span>© 2026 SoloBizKit</span><span>Free tools for solo businesses</span></div></div></footer>
-
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"SoloBizKit","url":"https://solobizkit.it.com/","description":"Free tools for freelancers and small businesses."}
-</script>
-</body></html>
+<meta name="description" content="Free business tools for freelancers, creators and small businesses: QR codes, business names, paycheck estimates, invoices, profit margins and hourly rates.">
+<link rel="canonical" href="https://solobizkit.it.com/"><meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:title" content="SoloBizKit – Free Business Tools"><meta property="og:description" content="Simple, free tools for freelancers and small businesses."><meta property="og:type" content="website"><meta property="og:url" content="https://solobizkit.it.com/">
+<meta name="twitter:card" content="summary"><link rel="stylesheet" href="/global-shell.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SoloBizKit","url":"https://solobizkit.it.com/","description":"Free online tools for freelancers and small businesses."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"SoloBizKit","url":"https://solobizkit.it.com/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"SoloBizKit Business Tools","itemListElement":[
+{"@type":"ListItem","position":1,"url":"https://solobizkit.it.com/qr-code-generator/","name":"QR Code Generator"},
+{"@type":"ListItem","position":2,"url":"https://solobizkit.it.com/business-name-generator/","name":"Business Name Generator"},
+{"@type":"ListItem","position":3,"url":"https://solobizkit.it.com/paycheck-calculator/","name":"Paycheck Calculator"},
+{"@type":"ListItem","position":4,"url":"https://solobizkit.it.com/invoice-generator/","name":"Invoice Generator"},
+{"@type":"ListItem","position":5,"url":"https://solobizkit.it.com/profit-margin-calculator/","name":"Profit Margin Calculator"},
+{"@type":"ListItem","position":6,"url":"https://solobizkit.it.com/hourly-rate-calculator/","name":"Hourly Rate Calculator"}]}</script>
+</head><body>
+<header class="sbk-global-header"><div class="sbk-global-nav"><a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a><nav class="sbk-global-links"><a href="#tools">Tools</a><a href="/qr-code-generator/">QR Code</a><a href="/business-name-generator/">Business Name</a><a href="/paycheck-calculator/">Paycheck</a><a href="/about/">About</a></nav><a class="sbk-global-tools" href="#tools">All Tools</a></div></header>
+<main><section class="hero"><div class="wrap"><span class="pill">6 free tools · no forced account</span><h1>Simple tools to run your solo business.</h1><p>Useful calculators and generators for freelancers, creators and small businesses — designed to get the job done quickly without unnecessary sign-ups.</p><div class="heroactions"><a class="cta" href="#tools">Explore free tools</a><a class="secondary" href="/qr-code-generator/">Create a QR code</a></div></div></section>
+<section class="tools" id="tools"><div class="wrap"><div class="sectionhead"><h2>Free business tools</h2><p>Start with one of six practical tools. Everything currently works without a SoloBizKit account.</p></div><div class="grid"><a class="tool" href="/qr-code-generator/"><div class="icon">▦</div><h3>QR Code Generator</h3><p>Create custom QR codes for URLs, Wi-Fi, contacts and more. Add a logo and export PNG or SVG.</p><span class="go">Open free tool →</span></a>
+<a class="tool" href="/business-name-generator/"><div class="icon">✦</div><h3>Business Name Generator</h3><p>Generate brandable business names, taglines and variations. Save your favorite ideas locally.</p><span class="go">Open free tool →</span></a>
+<a class="tool" href="/paycheck-calculator/"><div class="icon">$</div><h3>Paycheck Calculator</h3><p>Estimate salary or hourly take-home pay, withholding, payroll taxes and deductions.</p><span class="go">Open free tool →</span></a>
+<a class="tool" href="/invoice-generator/"><div class="icon">▤</div><h3>Invoice Generator</h3><p>Create a clean invoice in your browser and print it or save it as a PDF. No account required.</p><span class="go">Open free tool →</span></a>
+<a class="tool" href="/profit-margin-calculator/"><div class="icon">%</div><h3>Profit Margin Calculator</h3><p>Calculate gross profit, margin, markup and the price needed for your target margin.</p><span class="go">Open free tool →</span></a>
+<a class="tool" href="/hourly-rate-calculator/"><div class="icon">↗</div><h3>Hourly Rate Calculator</h3><p>Work out a sustainable freelance or consulting rate from income goals and billable hours.</p><span class="go">Open free tool →</span></a></div></div></section>
+<section class="why"><div class="wrap whygrid"><div><h3>Free to use</h3><p>The core tools are available without a subscription or forced account.</p></div><div><h3>Built for speed</h3><p>Clean interfaces, immediate results and mobile-friendly layouts keep simple jobs simple.</p></div><div><h3>Privacy-conscious</h3><p>Where practical, tool calculations and generation happen directly in your browser.</p></div></div></section>
+<section class="faqs"><div class="wrap faqwrap"><div class="sectionhead" style="text-align:left;margin-left:0"><h2>About SoloBizKit</h2><p>A growing collection of practical utilities for people running small businesses.</p></div><div class="faq"><h3>Do I need an account?</h3><p>No. The current SoloBizKit tools can be used without creating an account.</p></div><div class="faq"><h3>Are the calculators professional advice?</h3><p>No. Calculators are planning tools and estimates. Verify important financial, tax, legal and payroll decisions with appropriate official guidance or a qualified professional.</p></div><div class="faq"><h3>Will more tools be added?</h3><p>Yes. SoloBizKit is designed as a growing toolkit for common freelance and small-business tasks.</p></div></div></section></main>
+<footer class="sbk-global-footer"><div class="sbk-global-footer-inner"><div class="sbk-global-footer-grid"><div><a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a><p>Simple, free tools for freelancers, creators and small businesses. No forced account required.</p></div><div><strong>Tools</strong><a href="/qr-code-generator/">QR Code Generator</a><a href="/business-name-generator/">Business Name Generator</a><a href="/paycheck-calculator/">Paycheck Calculator</a><a href="/invoice-generator/">Invoice Generator</a><a href="/profit-margin-calculator/">Profit Margin Calculator</a><a href="/hourly-rate-calculator/">Hourly Rate Calculator</a></div><div><strong>Company</strong><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div><div class="sbk-global-bottom"><span>© 2026 SoloBizKit</span><span>Free tools for solo businesses</span></div></div></footer></body></html>
