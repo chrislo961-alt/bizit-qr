@@ -1,0 +1,24 @@
+SOLOBIZKIT – GOOGLE SEARCH CONSOLE
+
+Do NOT rename this into a verification file.
+
+1. Open Google Search Console.
+2. Add property: https://solobizkit.it.com/
+3. Choose the HTML file verification method.
+4. Google will give you a file named similar to:
+   google1234567890abcdef.html
+5. Download that exact file from Google and upload it to the ROOT of the GitHub repository.
+6. Confirm that this URL opens in your browser:
+   https://solobizkit.it.com/google1234567890abcdef.html
+7. Click Verify in Search Console.
+8. Submit:
+   https://solobizkit.it.com/sitemap.xml
+
+Then use URL Inspection and request indexing for:
+- https://solobizkit.it.com/
+- https://solobizkit.it.com/qr-code-generator/
+- https://solobizkit.it.com/business-name-generator/
+- https://solobizkit.it.com/paycheck-calculator/
+- https://solobizkit.it.com/invoice-generator/
+- https://solobizkit.it.com/profit-margin-calculator/
+- https://solobizkit.it.com/hourly-rate-calculator/

@@ -1,0 +1,68 @@
+SOLOBIZKIT V1 – FINAL LAUNCH CHECKLIST
+
+DOMAIN
+[ ] https://solobizkit.it.com/ loads
+[ ] HTTPS works without browser warning
+[ ] GitHub Pages custom domain is correct
+
+CORE PAGES
+[ ] Homepage
+[ ] QR Code Generator
+[ ] Business Name Generator
+[ ] Paycheck Calculator
+[ ] Invoice Generator
+[ ] Profit Margin Calculator
+[ ] Hourly Rate Calculator
+[ ] About
+[ ] Contact
+[ ] Privacy
+[ ] Terms
+
+FUNCTION TESTS
+[ ] QR: URL QR scans correctly
+[ ] QR: Wi-Fi QR scans correctly
+[ ] QR: PNG download works
+[ ] QR: SVG download works
+[ ] QR: logo QR scans correctly
+[ ] Business names generate
+[ ] Favorites survive page refresh
+[ ] Domain search opens
+[ ] Paycheck salary mode calculates
+[ ] Paycheck hourly mode calculates
+[ ] Invoice preview updates
+[ ] Invoice Print / Save PDF works
+[ ] Profit Margin results update
+[ ] Hourly Rate results update
+
+MOBILE
+[ ] Homepage looks good on phone
+[ ] All six tools fit without horizontal scrolling
+[ ] Inputs are easy to tap
+[ ] Download / action buttons work
+
+TRUST / LEGAL
+[ ] Add a real public support email on Contact page
+[ ] Privacy text matches services actually in use
+[ ] Terms page is accessible from footer
+[ ] Financial calculators visibly say they are estimates
+
+SEO
+[ ] /robots.txt loads
+[ ] /sitemap.xml loads
+[ ] Every tool has one canonical URL
+[ ] No accidental noindex tags on pages intended for Google
+[ ] Homepage links to all six tools
+[ ] Tool titles and descriptions are unique
+
+SEARCH CONSOLE
+[ ] Add URL-prefix property
+[ ] Upload Google's exact verification HTML file
+[ ] Verify property
+[ ] Submit sitemap.xml
+[ ] Request indexing for homepage
+[ ] Request indexing for all six tool URLs
+
+POST-LAUNCH
+[ ] Check Search Console indexing after several days
+[ ] Fix crawl/index errors before adding lots of new tools
+[ ] Watch impressions and queries to decide which SEO clusters to expand
