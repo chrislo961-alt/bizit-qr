@@ -3,253 +3,316 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Free QR Code Generator with Logo – PNG & SVG | SoloBizKit</title>
-<meta name="description" content="Create free custom QR codes for URLs, Wi-Fi, text, email, phone, SMS and contact cards. Add a logo, customize colors, and download PNG or SVG. No sign up.">
+<title>Free QR Code Generator – Simple, Fast & No Sign Up | SoloBizKit</title>
+<meta name="description" content="Create a QR code in seconds. Add a website, text, email, phone, SMS or Wi-Fi, customize the look, and download PNG or SVG. Free, no sign up.">
 <link rel="canonical" href="https://solobizkit.it.com/qr-code-generator/">
-<meta property="og:title" content="Free QR Code Generator with Logo | SoloBizKit">
-<meta property="og:description" content="Create custom QR codes with colors, logo and high-quality PNG or SVG downloads. Free, no sign up.">
+<meta property="og:title" content="Free QR Code Generator | SoloBizKit">
+<meta property="og:description" content="Create a QR code in seconds. Simple, clean and free.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://solobizkit.it.com/qr-code-generator/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://solobizkit.it.com/assets/images/solobizkit-social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/global-shell.css">
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js" defer></script>
-<style>
-:root{--ink:#12204a;--muted:#697386;--line:#e6e9f1;--accent:#6547e8;--green:#21875a;--bg:#fbfcff;--card:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-button,input,textarea,select{font:inherit}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}
-.hero{text-align:center;padding:62px 0 34px;background:radial-gradient(circle at 50% 0,#e9f7ef 0,transparent 43%)}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}.hero h1{font-size:clamp(40px,6vw,64px);letter-spacing:-.045em;line-height:1.02;margin:12px auto}.hero p{font-size:18px;color:var(--muted);max-width:760px;margin:auto;line-height:1.65}
-.app{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);gap:22px;padding:28px 0 72px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 16px 46px rgba(30,42,76,.06)}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.tab{border:1px solid var(--line);background:#f8f9fc;color:#586279;padding:9px 12px;border-radius:10px;font-weight:800;cursor:pointer;font-size:13px}.tab.active{background:#ecf8f1;border-color:#bee4cf;color:#176b47}
-.field{margin:15px 0}.field label{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:850;margin-bottom:7px}.field small{font-weight:500;color:var(--muted)}input[type=text],input[type=url],input[type=email],input[type=tel],input[type=number],textarea,select{width:100%;border:1px solid #dfe3ed;border-radius:12px;padding:12px 13px;color:var(--ink);background:#fff}textarea{resize:vertical;min-height:92px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.hidden{display:none!important}
-.section-title{font-size:14px;font-weight:900;margin:24px 0 7px;padding-top:18px;border-top:1px solid var(--line)}.presets{display:flex;gap:8px;flex-wrap:wrap}.preset{width:38px;height:38px;border-radius:10px;border:2px solid #fff;outline:1px solid var(--line);cursor:pointer}
-.colorrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}.colorfield{display:grid;grid-template-columns:48px 1fr;gap:8px;align-items:center}.colorfield input[type=color]{width:48px;height:43px;padding:3px;border:1px solid var(--line);border-radius:10px;background:#fff}
-.check{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:750;margin:12px 0}.check input{width:17px;height:17px}.upload{border:1px dashed #cfd5e2;border-radius:13px;padding:14px;text-align:center}.upload input{max-width:100%}.fine{font-size:12px;color:var(--muted);line-height:1.5}
-.preview{position:sticky;top:90px}.previewbox{display:grid;place-items:center;min-height:350px;border-radius:18px;background:linear-gradient(135deg,#f8f9fc,#eef5ff);border:1px solid var(--line);padding:22px}.qrframe{background:#fff;border-radius:13px;padding:8px;box-shadow:0 10px 30px rgba(34,48,80,.1);max-width:100%}.qrframe canvas{display:block;max-width:100%;height:auto}.status{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;font-size:12px;color:var(--muted)}.warning{color:#9a6812;font-weight:800}.good{color:#17734b;font-weight:800}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:12px 14px;font-weight:850;cursor:pointer}.primary{background:var(--accent);border-color:var(--accent);color:#fff}.full{grid-column:1/-1}.btn:hover{filter:brightness(.98)}
-.payload{margin-top:15px;border-top:1px solid var(--line);padding-top:15px}.payload code{display:block;background:#f7f8fb;border:1px solid var(--line);padding:11px;border-radius:10px;color:#505b73;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stat{background:#f7f8fb;border:1px solid var(--line);border-radius:11px;padding:10px;text-align:center}.stat b{display:block;font-size:15px}.stat span{font-size:10px;color:var(--muted)}
-.seo{background:#fff;border-top:1px solid var(--line);padding:64px 0}.seo .copy{max-width:850px}.seo h2{font-size:32px}.seo h3{font-size:17px;margin:0 0 7px}.seo p{color:var(--muted);line-height:1.72}.faq{border-top:1px solid var(--line);padding:17px 0}
-@media(max-width:900px){.app{grid-template-columns:1fr}.preview{position:static}.three{grid-template-columns:1fr}.hero{padding-top:46px}}
-@media(max-width:560px){.row,.colorrow,.actions{grid-template-columns:1fr}.full{grid-column:auto}.previewbox{min-height:300px}.tabs{gap:6px}.tab{font-size:12px;padding:8px 9px}}
-</style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"SoloBizKit QR Code Generator","url":"https://solobizkit.it.com/qr-code-generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free QR code generator with logo, colors, PNG and SVG export."}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Is the SoloBizKit QR Code Generator free?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can create and download static QR codes without creating an account."}},
-{"@type":"Question","name":"Do these QR codes expire?","acceptedAnswer":{"@type":"Answer","text":"No. Static QR codes contain the encoded information directly and do not depend on a SoloBizKit redirect."}},
-{"@type":"Question","name":"Can I add my logo to a QR code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Upload an image and SoloBizKit can place it in the center of the QR code. Higher error correction is recommended when using a logo."}},
-{"@type":"Question","name":"Can I download a QR code as SVG?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG and SVG downloads are available."}}
-]}
-</script>
+<link rel="stylesheet" href="/performance.css">
+<link rel="stylesheet" href="/brand.css">
 <link rel="stylesheet" href="/analytics-consent.css">
 <script src="/analytics.js" defer></script>
-<meta name="theme-color" content="#6547e8">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/performance.css">
-<link rel="stylesheet" href="/user-flow.css">
-<link rel="stylesheet" href="/brand.css">
-<meta property="og:image" content="https://solobizkit.it.com/assets/images/solobizkit-social-preview.png">
-<meta property="og:image:width" content="1536">
-<meta property="og:image:height" content="1024">
-<meta property="og:site_name" content="SoloBizKit">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://solobizkit.it.com/assets/images/solobizkit-social-preview.png">
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js" defer></script>
+<style>
+:root{
+  --ink:#142044;--muted:#74809a;--line:#e4e9f3;--accent:#6547e8;
+  --accent-soft:#f3f0ff;--green:#19734c;--bg:#f8faff;--card:#fff
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+button,input,textarea,select{font:inherit}
+.wrap{width:min(1100px,calc(100% - 30px));margin:auto}
+.simple-hero{padding:38px 0 18px}
+.hero-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 10px 30px rgba(36,49,85,.05)}
+.hero-title{display:flex;align-items:center;gap:16px}
+.hero-icon{width:56px;height:56px;border-radius:15px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-size:28px}
+.hero-title h1{margin:0;font-size:30px;letter-spacing:-.03em}
+.hero-title p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.help-link{font-size:13px;font-weight:800;color:var(--accent);white-space:nowrap}
+.app{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:20px;padding:10px 0 70px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(36,49,85,.05)}
+.step{padding:0 0 24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.step:last-of-type{border-bottom:0;margin-bottom:0}
+.step-head{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.step-no{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:13px;font-weight:900}
+.step h2{margin:0;font-size:18px}
+.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:11px;padding:11px 7px;color:#58627a;font-size:12px;font-weight:800;cursor:pointer}
+.tab.active{border-color:#8c78f0;background:#faf8ff;color:#5b3fe1;box-shadow:0 0 0 1px #dcd5ff inset}
+.field{margin-top:16px}
+label{display:block;font-size:12px;font-weight:850;margin-bottom:7px}
+input,textarea,select{width:100%;border:1px solid #dfe4ee;border-radius:11px;background:#fff;color:var(--ink);padding:12px 13px}
+textarea{resize:vertical;min-height:90px}
+.helper{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.colors{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.color-control{display:grid;grid-template-columns:44px 1fr;gap:8px}
+.color-control input[type=color]{height:44px;padding:3px}
+.style-options{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}
+.style-option{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;text-align:center;cursor:pointer}
+.style-option.active{border-color:#8c78f0;background:#faf8ff}
+.style-preview{width:38px;height:38px;margin:0 auto 6px;border:3px solid #17213f}
+.style-option span{font-size:11px;font-weight:750;color:#566077}
+.advanced{margin-top:14px}
+.advanced summary{cursor:pointer;color:#5d6780;font-size:12px;font-weight:800}
+.advanced-body{padding-top:12px}
+.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:11px;padding:12px 14px;font-weight:900;cursor:pointer}
+.btn.primary{background:linear-gradient(135deg,#6245e8,#754ff0);color:#fff;border-color:#6245e8}
+.privacy-note{display:flex;gap:8px;align-items:flex-start;margin-top:15px;font-size:11px;color:var(--muted);line-height:1.45}
+.preview{position:sticky;top:84px}
+.preview-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.preview-top h2{margin:0;font-size:18px}
+.ready{font-size:11px;font-weight:850;color:var(--green);background:#eaf7f0;border-radius:999px;padding:6px 9px}
+.qr-stage{background:#f1f5fb;border:1px solid #e2e7f1;border-radius:16px;min-height:345px;padding:20px;display:grid;place-items:center}
+.qr-white{background:#fff;border-radius:13px;padding:18px;box-shadow:0 8px 25px rgba(27,39,70,.06)}
+.qr-white canvas{display:block;width:min(280px,100%);height:auto}
+.tip{background:#f6f2ff;border-radius:12px;padding:12px 13px;margin-top:14px;font-size:11px;color:#5c5673;line-height:1.5}
+.size-title{font-size:12px;font-weight:850;margin:18px 0 8px}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.size{border:1px solid var(--line);border-radius:11px;padding:12px;text-align:center;background:#fff;cursor:pointer}
+.size.active{border-color:#8c78f0;background:#faf8ff}
+.size b{display:block;font-size:15px}
+.size span{font-size:10px;color:var(--muted)}
+.copy{width:100%;margin-top:12px}
+.typepanel.hidden{display:none}
+@media(max-width:850px){
+  .app{grid-template-columns:1fr}.preview{position:static}.tabs{grid-template-columns:repeat(3,1fr)}
+  .hero-card{align-items:flex-start}.help-link{display:none}
+}
+@media(max-width:560px){
+  .panel{padding:18px}.hero-card{padding:18px}.hero-title h1{font-size:24px}
+  .row,.colors,.download-grid{grid-template-columns:1fr}
+  .style-options{grid-template-columns:1fr 1fr}.tabs{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
 <body>
-<header class="sbk-global-header"><div class="sbk-global-nav"><a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a><nav class="sbk-global-links"><a href="/qr-code-generator/">QR Code</a><a href="/business-name-generator/">Business Name</a><a href="/paycheck-calculator/">Paycheck</a><a href="/about/">About</a></nav><a class="sbk-global-tools" href="/#tools">All Tools</a></div></header>
+<header class="sbk-global-header"><div class="sbk-global-nav"><a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a><nav class="sbk-global-links"><a href="/tools/">All Tools</a><a href="/business-name-generator/">Business Name</a><a href="/invoice-generator/">Invoice</a><a href="/about/">About</a></nav></div></header>
 
 <main>
-<section class="hero"><div class="wrap"><div class="eyebrow">100% free · no sign up · static QR codes</div><h1>Free QR Code Generator</h1><p>Create high-quality QR codes for websites, Wi-Fi, text, email, phone, SMS and contact cards. Add your logo, customize the design and download PNG or SVG.</p></div></section>
-
-<section class="wrap app">
-<div class="panel">
-<div class="tabs" role="tablist">
-<button class="tab active" data-type="url">🔗 URL</button>
-<button class="tab" data-type="wifi">⌁ Wi-Fi</button>
-<button class="tab" data-type="text">✎ Text</button>
-<button class="tab" data-type="email">✉ Email</button>
-<button class="tab" data-type="phone">☎ Phone</button>
-<button class="tab" data-type="sms">💬 SMS</button>
-<button class="tab" data-type="vcard">👤 Contact</button>
-</div>
-
-<div class="typepanel" data-panel="url"><div class="field"><label for="url">Website URL <small>Include https://</small></label><input id="url" type="url" value="https://solobizkit.it.com" placeholder="https://example.com"></div></div>
-<div class="typepanel hidden" data-panel="wifi">
-<div class="field"><label for="ssid">Network name (SSID)</label><input id="ssid" type="text" placeholder="My Wi-Fi"></div>
-<div class="row"><div class="field"><label for="wifiPass">Password</label><input id="wifiPass" type="text" placeholder="Password"></div><div class="field"><label for="security">Security</label><select id="security"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">None</option></select></div></div>
-<label class="check"><input id="hiddenWifi" type="checkbox"> Hidden network</label>
-</div>
-<div class="typepanel hidden" data-panel="text"><div class="field"><label for="text">Text</label><textarea id="text" placeholder="Enter any text"></textarea></div></div>
-<div class="typepanel hidden" data-panel="email"><div class="field"><label for="email">Email address</label><input id="email" type="email" placeholder="hello@example.com"></div><div class="field"><label for="subject">Subject <small>optional</small></label><input id="subject" type="text" placeholder="Hello"></div><div class="field"><label for="emailBody">Message <small>optional</small></label><textarea id="emailBody" placeholder="Your message"></textarea></div></div>
-<div class="typepanel hidden" data-panel="phone"><div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" placeholder="+1 555 123 4567"></div></div>
-<div class="typepanel hidden" data-panel="sms"><div class="field"><label for="smsPhone">Phone number</label><input id="smsPhone" type="tel" placeholder="+1 555 123 4567"></div><div class="field"><label for="smsBody">Message</label><textarea id="smsBody" placeholder="Type a pre-filled SMS message"></textarea></div></div>
-<div class="typepanel hidden" data-panel="vcard">
-<div class="row"><div class="field"><label for="firstName">First name</label><input id="firstName" type="text" placeholder="Alex"></div><div class="field"><label for="lastName">Last name</label><input id="lastName" type="text" placeholder="Morgan"></div></div>
-<div class="row"><div class="field"><label for="vPhone">Phone</label><input id="vPhone" type="tel" placeholder="+1 555 123 4567"></div><div class="field"><label for="vEmail">Email</label><input id="vEmail" type="email" placeholder="alex@example.com"></div></div>
-<div class="field"><label for="company">Company <small>optional</small></label><input id="company" type="text" placeholder="SoloBizKit"></div>
-<div class="field"><label for="website">Website <small>optional</small></label><input id="website" type="url" placeholder="https://example.com"></div>
-</div>
-
-<div class="section-title">Design</div>
-<div class="presets" aria-label="Color presets">
-<button class="preset" data-fg="#111827" data-bg="#ffffff" style="background:linear-gradient(135deg,#111827 50%,#fff 50%)" title="Classic"></button>
-<button class="preset" data-fg="#6547e8" data-bg="#ffffff" style="background:linear-gradient(135deg,#6547e8 50%,#fff 50%)" title="SoloBiz Purple"></button>
-<button class="preset" data-fg="#14532d" data-bg="#ecfdf5" style="background:linear-gradient(135deg,#14532d 50%,#ecfdf5 50%)" title="Forest"></button>
-<button class="preset" data-fg="#0f3b66" data-bg="#eff6ff" style="background:linear-gradient(135deg,#0f3b66 50%,#eff6ff 50%)" title="Ocean"></button>
-<button class="preset" data-fg="#7c2d12" data-bg="#fff7ed" style="background:linear-gradient(135deg,#7c2d12 50%,#fff7ed 50%)" title="Warm"></button>
-</div>
-<div class="colorrow">
-<div class="field"><label>QR color</label><div class="colorfield"><input id="fg" type="color" value="#111827"><input id="fgText" type="text" value="#111827"></div></div>
-<div class="field"><label>Background</label><div class="colorfield"><input id="bg" type="color" value="#ffffff"><input id="bgText" type="text" value="#ffffff"></div></div>
-</div>
-<label class="check"><input id="transparent" type="checkbox"> Transparent background</label>
-
-<div class="three">
-<div class="field"><label for="size">Size</label><select id="size"><option value="512">512 px</option><option value="768">768 px</option><option value="1024" selected>1024 px</option><option value="1536">1536 px</option><option value="2048">2048 px</option></select></div>
-<div class="field"><label for="margin">Margin</label><select id="margin"><option value="1">Small</option><option value="2" selected>Medium</option><option value="4">Large</option></select></div>
-<div class="field"><label for="level">Error correction</label><select id="level"><option value="L">Low</option><option value="M">Medium</option><option value="Q">Quartile</option><option value="H" selected>High</option></select></div>
-</div>
-
-<div class="section-title">Logo <span class="fine">(optional)</span></div>
-<div class="upload"><input id="logo" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"><div class="fine" style="margin-top:8px">Square logos work best. High error correction is recommended.</div></div>
-<div class="row"><div class="field"><label for="logoSize">Logo size</label><select id="logoSize"><option value=".14">Small</option><option value=".18" selected>Medium</option><option value=".22">Large</option></select></div><div class="field"><label for="logoPad">Logo padding</label><select id="logoPad"><option value="0">None</option><option value=".015">Small</option><option value=".025" selected>Medium</option></select></div></div>
-<label class="check"><input id="logoBg" type="checkbox" checked> White background behind logo</label>
-</div>
-
-<aside class="panel preview">
-<h2 style="margin:0 0 15px">Live preview</h2>
-<div class="previewbox"><div class="qrframe"><canvas id="canvas" width="1024" height="1024"></canvas></div></div>
-<div class="status"><span id="status">Ready</span><span id="contrast" class="good">Good contrast</span></div>
-<div class="stats"><div class="stat"><b id="statSize">1024</b><span>pixels</span></div><div class="stat"><b id="statLevel">H</b><span>error correction</span></div><div class="stat"><b id="statChars">0</b><span>characters</span></div></div>
-<div class="actions"><button class="btn primary" id="png">Download PNG</button><button class="btn" id="svg">Download SVG</button><button class="btn full" id="copy">Copy QR content</button></div>
-<div class="payload"><div class="fine" style="margin-bottom:6px">ENCODED CONTENT</div><code id="payload"></code></div>
-<div class="fine" style="margin-top:14px">Tip: Always scan-test your downloaded QR code before printing or publishing it, especially after adding a logo or custom colors.</div>
-</aside>
+<section class="simple-hero">
+  <div class="wrap">
+    <div class="hero-card">
+      <div class="hero-title">
+        <div class="hero-icon">▦</div>
+        <div><h1>QR Code Generator</h1><p>Create a QR code in a few seconds.</p></div>
+      </div>
+      <a class="help-link" href="#how">How does it work?</a>
+    </div>
+  </div>
 </section>
 
-<section class="seo"><div class="wrap copy">
-<h2>Create custom QR codes without signing up</h2>
-<p>SoloBizKit creates static QR codes directly from the information you enter. You can customize colors, add a center logo, choose error correction and export high-resolution PNG or scalable SVG files.</p>
-<div class="faq"><h3>Do these QR codes expire?</h3><p>No. A static QR code stores its destination or information directly in the code. It does not require a SoloBizKit redirect to keep working.</p></div>
-<div class="faq"><h3>Should I use high error correction with a logo?</h3><p>Usually, yes. A logo covers part of the QR pattern. Higher error correction gives scanners more redundancy, but you should still keep logos reasonably small and test the final code.</p></div>
-<div class="faq"><h3>Which file format should I download?</h3><p>PNG works well for websites, documents and social media. SVG is vector-based and is often preferable for print because it can scale without becoming pixelated.</p></div>
-<div class="faq"><h3>Can I make a Wi-Fi QR code?</h3><p>Yes. Enter the network name, password and security type. Many phones can scan the resulting QR code to join the network.</p></div>
-</div></section>
+<section class="wrap app">
+  <section class="panel">
+
+    <div class="step">
+      <div class="step-head"><span class="step-no">1</span><h2>What should the QR code open?</h2></div>
+
+      <div class="tabs">
+        <button class="tab active" data-type="url">🔗 Website</button>
+        <button class="tab" data-type="text">✎ Text</button>
+        <button class="tab" data-type="email">✉ Email</button>
+        <button class="tab" data-type="phone">☎ Phone</button>
+        <button class="tab" data-type="sms">💬 SMS</button>
+        <button class="tab" data-type="wifi">⌁ Wi-Fi</button>
+      </div>
+
+      <div class="typepanel" data-panel="url">
+        <div class="field"><label>Website address</label><input id="url" value="https://solobizkit.it.com" placeholder="https://example.com"><div class="helper">Paste the full web address, including https://</div></div>
+      </div>
+
+      <div class="typepanel hidden" data-panel="text">
+        <div class="field"><label>Text</label><textarea id="text" placeholder="Type the text you want inside the QR code"></textarea></div>
+      </div>
+
+      <div class="typepanel hidden" data-panel="email">
+        <div class="field"><label>Email address</label><input id="email" type="email" placeholder="hello@example.com"></div>
+        <div class="field"><label>Subject <span class="helper">(optional)</span></label><input id="subject" placeholder="Hello"></div>
+      </div>
+
+      <div class="typepanel hidden" data-panel="phone">
+        <div class="field"><label>Phone number</label><input id="phone" placeholder="+1 555 123 4567"></div>
+      </div>
+
+      <div class="typepanel hidden" data-panel="sms">
+        <div class="field"><label>Phone number</label><input id="smsPhone" placeholder="+1 555 123 4567"></div>
+        <div class="field"><label>Message <span class="helper">(optional)</span></label><textarea id="smsBody" placeholder="Pre-filled message"></textarea></div>
+      </div>
+
+      <div class="typepanel hidden" data-panel="wifi">
+        <div class="field"><label>Wi-Fi name</label><input id="ssid" placeholder="My Wi-Fi"></div>
+        <div class="row">
+          <div class="field"><label>Password</label><input id="wifiPass" placeholder="Password"></div>
+          <div class="field"><label>Security</label><select id="security"><option value="WPA">WPA / WPA2</option><option value="WEP">WEP</option><option value="nopass">No password</option></select></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head"><span class="step-no">2</span><h2>Customize the design <span class="helper">(optional)</span></h2></div>
+
+      <div class="colors">
+        <div>
+          <label>QR color</label>
+          <div class="color-control"><input id="fg" type="color" value="#111827"><input id="fgText" value="#111827"></div>
+        </div>
+        <div>
+          <label>Background</label>
+          <div class="color-control"><input id="bg" type="color" value="#ffffff"><input id="bgText" value="#ffffff"></div>
+        </div>
+      </div>
+
+      <div class="style-options">
+        <button class="style-option active" type="button"><div class="style-preview"></div><span>Standard</span></button>
+        <button class="style-option" type="button"><div class="style-preview" style="border-radius:10px"></div><span>Rounded</span></button>
+        <button class="style-option" type="button"><div class="style-preview" style="border-style:dotted"></div><span>Dots</span></button>
+        <button class="style-option" type="button"><div class="style-preview" style="border-width:5px"></div><span>Bold</span></button>
+      </div>
+
+      <details class="advanced">
+        <summary>Advanced options</summary>
+        <div class="advanced-body">
+          <div class="row">
+            <div class="field"><label>Error correction</label><select id="level"><option value="M">Standard</option><option value="Q">Strong</option><option value="H" selected>Very strong</option></select></div>
+            <div class="field"><label>Margin</label><select id="margin"><option value="1">Small</option><option value="2" selected>Normal</option><option value="4">Large</option></select></div>
+          </div>
+          <div class="field"><label>Logo <span class="helper">(optional)</span></label><input id="logo" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"><div class="helper">Square logos work best.</div></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="step">
+      <div class="step-head"><span class="step-no">3</span><h2>Download your QR code</h2></div>
+      <div class="download-grid">
+        <button class="btn primary" id="png">↓ Download PNG</button>
+        <button class="btn" id="svg">↓ Download SVG</button>
+      </div>
+      <div class="privacy-note">🔒 <span>We do not store your QR content. The code is generated in your browser.</span></div>
+    </div>
+  </section>
+
+  <aside class="panel preview">
+    <div class="preview-top"><h2>Preview</h2><span class="ready" id="ready">✓ Ready</span></div>
+    <div class="qr-stage"><div class="qr-white"><canvas id="canvas" width="1024" height="1024"></canvas></div></div>
+    <div class="tip">💡 Tip: Scan the QR code with your phone before printing it.</div>
+
+    <div class="size-title">Size</div>
+    <div class="sizes">
+      <button class="size" data-size="512"><b>S</b><span>512 px</span></button>
+      <button class="size active" data-size="1024"><b>M</b><span>1024 px</span></button>
+      <button class="size" data-size="2048"><b>L</b><span>2048 px</span></button>
+    </div>
+
+    <button class="btn copy" id="copy">Copy QR content</button>
+  </aside>
+</section>
+
+<section id="how" style="background:#fff;border-top:1px solid #e6e9f1;padding:54px 0">
+  <div class="wrap" style="max-width:760px">
+    <h2>How it works</h2>
+    <p style="color:#74809a;line-height:1.7">Choose what the QR code should open, optionally change the colors, then download it. For most people, the default settings are already a good choice.</p>
+  </div>
+</section>
 </main>
 
-<section class="sbk-flow"><div class="sbk-flow-inner"><div class="sbk-flow-head"><div><h2>Related SoloBizKit tools</h2><p>Continue with a tool that matches what you are working on.</p></div><a href="/tools/" style="font-size:12px;font-weight:850;color:#6547e8">View all tools →</a></div><div class="sbk-flow-grid"><a class="sbk-flow-card" href="/qr-code-with-logo/"><strong>QR Code With Logo</strong><span>Create a branded QR workflow.</span><b>Open tool →</b></a><a class="sbk-flow-card" href="/wifi-qr-code-generator/"><strong>WiFi QR Code Generator</strong><span>Make a QR code guests can scan to join Wi-Fi.</span><b>Open tool →</b></a><a class="sbk-flow-card" href="/qr-code-for-business-card/"><strong>QR Code for Business Card</strong><span>Connect print to a digital destination.</span><b>Open tool →</b></a></div><div class="sbk-next"><div><strong>Need a branded version?</strong><span>Use the logo-focused QR workflow.</span></div><a href="/qr-code-with-logo/">Create QR with logo</a></div></div></section><footer class="sbk-global-footer"><div class="sbk-global-footer-inner"><div class="sbk-global-footer-grid"><div><a class="sbk-global-brand" href="/">SoloBiz<span>Kit</span></a><p>Simple, free tools for freelancers, creators and small businesses. No forced account required.</p></div><div><strong>Tools</strong><a href="/qr-code-generator/">QR Code Generator</a><a href="/business-name-generator/">Business Name Generator</a><a href="/paycheck-calculator/">Paycheck Calculator</a></div><div><strong>Company</strong><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div><div class="sbk-global-bottom"><span>© 2026 SoloBizKit</span><span>Free tools for solo businesses</span></div></div></footer>
+<footer class="sbk-global-footer"><div class="sbk-global-footer-inner"><div class="sbk-global-bottom"><span>© 2026 SoloBizKit</span><span><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/contact/">Contact</a></span></div></div></footer>
 
 <script>
 window.addEventListener("DOMContentLoaded",()=>{
 const $=id=>document.getElementById(id);
-let type="url", logoData=null, renderTimer=null, currentPayload="";
+let type="url",size=1024,logoData=null,currentPayload="",timer=null;
 
 function escWifi(s){return String(s||"").replace(/([\\;,":])/g,"\\$1")}
-function escV(s){return String(s||"").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;")}
 function payload(){
- if(type==="url") return $("url").value.trim() || "https://solobizkit.it.com";
- if(type==="text") return $("text").value || "SoloBizKit";
- if(type==="phone") return "tel:"+$("phone").value.trim();
- if(type==="sms") return "SMSTO:"+$("smsPhone").value.trim()+":"+$("smsBody").value;
- if(type==="email"){
-   const e=$("email").value.trim(), q=new URLSearchParams();
-   if($("subject").value) q.set("subject",$("subject").value);
-   if($("emailBody").value) q.set("body",$("emailBody").value);
-   return "mailto:"+e+(q.toString()?"?"+q.toString():"");
- }
- if(type==="wifi"){
-   const sec=$("security").value==="nopass"?"":$("security").value;
-   return `WIFI:T:${sec};S:${escWifi($("ssid").value)};P:${escWifi($("wifiPass").value)};H:${$("hiddenWifi").checked?"true":"false"};;`;
- }
- if(type==="vcard"){
-   return ["BEGIN:VCARD","VERSION:3.0",
-   "N:"+escV($("lastName").value)+";"+escV($("firstName").value)+";;;",
-   "FN:"+escV(($("firstName").value+" "+$("lastName").value).trim()),
-   $("company").value?"ORG:"+escV($("company").value):"",
-   $("vPhone").value?"TEL;TYPE=CELL:"+escV($("vPhone").value):"",
-   $("vEmail").value?"EMAIL:"+escV($("vEmail").value):"",
-   $("website").value?"URL:"+escV($("website").value):"",
-   "END:VCARD"].filter(Boolean).join("\n");
- }
- return "";
+  if(type==="url") return $("url").value.trim() || "https://solobizkit.it.com";
+  if(type==="text") return $("text").value || "SoloBizKit";
+  if(type==="email"){
+    const q=new URLSearchParams();
+    if($("subject").value) q.set("subject",$("subject").value);
+    return "mailto:"+$("email").value.trim()+(q.toString()?"?"+q.toString():"");
+  }
+  if(type==="phone") return "tel:"+$("phone").value.trim();
+  if(type==="sms") return "SMSTO:"+$("smsPhone").value.trim()+":"+$("smsBody").value;
+  if(type==="wifi"){
+    const sec=$("security").value==="nopass"?"":$("security").value;
+    return `WIFI:T:${sec};S:${escWifi($("ssid").value)};P:${escWifi($("wifiPass").value)};;`;
+  }
+  return "";
 }
-function hexRgb(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
-function lum(h){const [r,g,b]=hexRgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b}
-function contrast(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)}
-function updateContrast(){
- if($("transparent").checked){$("contrast").textContent="Transparent background";$("contrast").className="warning";return}
- const c=contrast($("fg").value,$("bg").value);
- $("contrast").textContent=c>=4.5?"Good contrast":c>=3?"Moderate contrast":"Low contrast";
- $("contrast").className=c>=4.5?"good":"warning";
-}
-function syncColor(color,text,fromText=false){
- if(fromText){
-  const v=text.value.trim();
-  if(/^#[0-9a-fA-F]{6}$/.test(v)) color.value=v;
- } else text.value=color.value;
- schedule();
-}
-async function drawLogo(canvas){
- if(!logoData) return;
- const ctx=canvas.getContext("2d"), img=new Image();
- await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=logoData});
- const frac=parseFloat($("logoSize").value), padFrac=parseFloat($("logoPad").value);
- const s=canvas.width*frac, x=(canvas.width-s)/2, y=(canvas.height-s)/2, pad=canvas.width*padFrac;
- if($("logoBg").checked){
-   ctx.fillStyle="#ffffff";
-   const rx=x-pad,ry=y-pad,rw=s+pad*2,rh=s+pad*2,r=Math.max(8,canvas.width*.015);
-   ctx.beginPath();ctx.roundRect(rx,ry,rw,rh,r);ctx.fill();
- }
- const ratio=Math.min(s/img.width,s/img.height), w=img.width*ratio,h=img.height*ratio;
- ctx.drawImage(img,(canvas.width-w)/2,(canvas.height-h)/2,w,h);
+async function drawLogo(){
+  if(!logoData)return;
+  const canvas=$("canvas"),ctx=canvas.getContext("2d"),img=new Image();
+  await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=logoData});
+  const s=canvas.width*.18,x=(canvas.width-s)/2,y=(canvas.height-s)/2,p=canvas.width*.018;
+  ctx.fillStyle="#fff";ctx.fillRect(x-p,y-p,s+p*2,s+p*2);
+  const ratio=Math.min(s/img.width,s/img.height),w=img.width*ratio,h=img.height*ratio;
+  ctx.drawImage(img,(canvas.width-w)/2,(canvas.height-h)/2,w,h);
 }
 async function render(){
- if(typeof QRCode==="undefined"){setTimeout(render,100);return}
- currentPayload=payload();
- const size=parseInt($("size").value), margin=parseInt($("margin").value), level=$("level").value;
- const dark=$("fg").value, light=$("transparent").checked?"#00000000":$("bg").value;
- $("status").textContent="Rendering…";
- try{
-  await QRCode.toCanvas($("canvas"),currentPayload,{width:size,margin,errorCorrectionLevel:level,color:{dark,light}});
-  await drawLogo($("canvas"));
-  $("payload").textContent=currentPayload;
-  $("statSize").textContent=size;$("statLevel").textContent=level;$("statChars").textContent=currentPayload.length;
-  updateContrast();
-  $("status").textContent="Ready to download";
- }catch(e){$("status").textContent="Could not generate QR";console.error(e)}
+  if(typeof QRCode==="undefined"){setTimeout(render,100);return}
+  currentPayload=payload();
+  $("ready").textContent="Generating…";
+  try{
+    await QRCode.toCanvas($("canvas"),currentPayload,{
+      width:size,
+      margin:parseInt($("margin").value),
+      errorCorrectionLevel:$("level").value,
+      color:{dark:$("fg").value,light:$("bg").value}
+    });
+    await drawLogo();
+    $("ready").textContent="✓ Ready";
+  }catch(e){$("ready").textContent="Try again"}
 }
-function schedule(){clearTimeout(renderTimer);renderTimer=setTimeout(render,100)}
+function schedule(){clearTimeout(timer);timer=setTimeout(render,90)}
+
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
- type=b.dataset.type; document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));
- document.querySelectorAll(".typepanel").forEach(x=>x.classList.toggle("hidden",x.dataset.panel!==type)); schedule();
+  type=b.dataset.type;
+  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));
+  document.querySelectorAll(".typepanel").forEach(x=>x.classList.toggle("hidden",x.dataset.panel!==type));
+  schedule();
 }));
-document.querySelectorAll("input,textarea,select").forEach(el=>{if(el.id!=="logo")el.addEventListener("input",schedule)});
-$("fg").addEventListener("input",()=>syncColor($("fg"),$("fgText")));
-$("bg").addEventListener("input",()=>syncColor($("bg"),$("bgText")));
-$("fgText").addEventListener("input",()=>syncColor($("fg"),$("fgText"),true));
-$("bgText").addEventListener("input",()=>syncColor($("bg"),$("bgText"),true));
-document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>{$("fg").value=b.dataset.fg;$("bg").value=b.dataset.bg;$("fgText").value=b.dataset.fg;$("bgText").value=b.dataset.bg;$("transparent").checked=false;schedule()}));
+
+document.querySelectorAll("input,textarea,select").forEach(el=>{
+  if(el.id!=="logo")el.addEventListener("input",schedule);
+});
+
+$("fg").addEventListener("input",()=>{$("fgText").value=$("fg").value;schedule()});
+$("bg").addEventListener("input",()=>{$("bgText").value=$("bg").value;schedule()});
+$("fgText").addEventListener("input",()=>{if(/^#[0-9a-fA-F]{6}$/.test($("fgText").value)){$("fg").value=$("fgText").value;schedule()}});
+$("bgText").addEventListener("input",()=>{if(/^#[0-9a-fA-F]{6}$/.test($("bgText").value)){$("bg").value=$("bgText").value;schedule()}});
+
+document.querySelectorAll(".size").forEach(b=>b.addEventListener("click",()=>{
+  size=parseInt(b.dataset.size);
+  document.querySelectorAll(".size").forEach(x=>x.classList.toggle("active",x===b));
+  schedule();
+}));
+
 $("logo").addEventListener("change",e=>{
- const f=e.target.files[0];if(!f){logoData=null;schedule();return}
- if(f.size>3*1024*1024){alert("Please choose a logo smaller than 3 MB.");e.target.value="";return}
- const r=new FileReader();r.onload=()=>{logoData=r.result;$("level").value="H";schedule()};r.readAsDataURL(f);
+  const f=e.target.files[0];
+  if(!f){logoData=null;schedule();return}
+  const r=new FileReader();r.onload=()=>{logoData=r.result;$("level").value="H";schedule()};r.readAsDataURL(f);
 });
-function downloadBlob(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-$("png").addEventListener("click",()=>{$("canvas").toBlob(b=>downloadBlob(b,"solobizkit-qr-code.png"),"image/png")});
+
+function downloadBlob(blob,name){
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+$("png").addEventListener("click",()=>$("canvas").toBlob(b=>downloadBlob(b,"solobizkit-qr-code.png"),"image/png"));
 $("svg").addEventListener("click",async()=>{
- const opts={margin:parseInt($("margin").value),errorCorrectionLevel:$("level").value,color:{dark:$("fg").value,light:$("transparent").checked?"#00000000":$("bg").value}};
- let s=await QRCode.toString(currentPayload,{...opts,type:"svg",width:parseInt($("size").value)});
- if(logoData){
-   const frac=parseFloat($("logoSize").value), pct=frac*100, xy=(100-pct)/2;
-   const bg=$("logoBg").checked?`<rect x="${xy-2}" y="${xy-2}" width="${pct+4}" height="${pct+4}" rx="2" fill="#fff"/>`:"";
-   s=s.replace("</svg>",`${bg}<image href="${logoData}" x="${xy}%" y="${xy}%" width="${pct}%" height="${pct}%" preserveAspectRatio="xMidYMid meet"/></svg>`);
- }
- downloadBlob(new Blob([s],{type:"image/svg+xml"}),"solobizkit-qr-code.svg");
+  const s=await QRCode.toString(currentPayload,{type:"svg",width:size,margin:parseInt($("margin").value),errorCorrectionLevel:$("level").value,color:{dark:$("fg").value,light:$("bg").value}});
+  downloadBlob(new Blob([s],{type:"image/svg+xml"}),"solobizkit-qr-code.svg");
 });
-$("copy").addEventListener("click",async()=>{await navigator.clipboard.writeText(currentPayload);const old=$("copy").textContent;$("copy").textContent="Copied!";setTimeout(()=>$("copy").textContent=old,900)});
+$("copy").addEventListener("click",async()=>{
+  await navigator.clipboard.writeText(currentPayload);
+  const old=$("copy").textContent;$("copy").textContent="Copied ✓";setTimeout(()=>$("copy").textContent=old,900);
+});
 render();
 });
 </script>
