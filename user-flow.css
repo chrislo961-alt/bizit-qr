@@ -1,0 +1,18 @@
+
+/* SoloBizKit Step 17 — user-flow helpers */
+.sbk-flow{border-top:1px solid #e6e9f1;background:#fff;padding:46px 0}
+.sbk-flow-inner{width:min(1120px,calc(100% - 32px));margin:auto}
+.sbk-flow-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:16px}
+.sbk-flow-head h2{margin:0;font-size:26px;color:#12204a}
+.sbk-flow-head p{margin:4px 0 0;color:#697386;font-size:13px}
+.sbk-flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sbk-flow-card{display:block;border:1px solid #e6e9f1;background:#fbfcff;border-radius:14px;padding:16px;text-decoration:none;color:#12204a;transition:.15s}
+.sbk-flow-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(30,42,76,.07)}
+.sbk-flow-card strong{display:block;font-size:14px;margin-bottom:5px}
+.sbk-flow-card span{display:block;color:#697386;font-size:12px;line-height:1.5}
+.sbk-flow-card b{display:block;color:#6547e8;font-size:11px;margin-top:10px}
+.sbk-next{margin-top:14px;border:1px solid #d9d1ff;background:#f5f2ff;border-radius:14px;padding:15px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.sbk-next strong{display:block;font-size:14px}
+.sbk-next span{display:block;color:#697386;font-size:12px;margin-top:3px}
+.sbk-next a{flex-shrink:0;background:#6547e8;color:#fff;text-decoration:none;border-radius:10px;padding:10px 13px;font-size:12px;font-weight:850}
+@media(max-width:760px){.sbk-flow-grid{grid-template-columns:1fr}.sbk-flow-head,.sbk-next{display:block}.sbk-next a{display:inline-block;margin-top:12px}}
