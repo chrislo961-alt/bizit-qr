@@ -1,0 +1,7 @@
+/* SoloBizKit analytics consent banner */
+#sbk-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:99999;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.sbk-consent-inner{max-width:980px;margin:auto;background:#fff;color:#12204a;border:1px solid #e6e9f1;border-radius:16px;box-shadow:0 18px 55px rgba(20,30,65,.18);padding:18px;display:flex;gap:22px;align-items:center;justify-content:space-between}
+.sbk-consent-inner strong{font-size:15px}.sbk-consent-inner p{margin:5px 0 0;color:#697386;font-size:12px;line-height:1.55;max-width:650px}
+.sbk-consent-actions{display:flex;gap:8px;flex-shrink:0}.sbk-consent-actions button{border:1px solid #dfe3ed;background:#fff;color:#12204a;border-radius:9px;padding:10px 13px;font-weight:800;cursor:pointer}
+#sbk-accept{background:#6547e8!important;color:#fff!important;border-color:#6547e8!important}
+@media(max-width:700px){.sbk-consent-inner{display:block}.sbk-consent-actions{margin-top:14px}.sbk-consent-actions button{flex:1}}

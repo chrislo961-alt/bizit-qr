@@ -1,0 +1,8 @@
+## Analytics
+
+SoloBizKit uses Google Analytics only after a visitor chooses to accept analytics cookies.
+Analytics is used to understand aggregate usage such as page visits and interactions with tools.
+SoloBizKit's analytics implementation does not intentionally send values entered into calculators,
+QR-code fields, invoice fields, or business-name fields as analytics event parameters.
+
+Visitors can decline analytics cookies. If consent is declined, the analytics script is not loaded.
