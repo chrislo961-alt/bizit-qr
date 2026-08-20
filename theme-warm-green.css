@@ -1,28 +1,28 @@
 
-/* SoloBizKit Warm Green Theme */
+/* SoloBizKit Blue & White Theme */
 :root{
-  --sbk-bg:#F7F5F0;
+  --sbk-bg:#F7FAFF;
   --sbk-card:#FFFFFF;
-  --sbk-text:#252823;
-  --sbk-muted:#6F746C;
-  --sbk-green:#3F6B55;
-  --sbk-green-dark:#315442;
-  --sbk-green-soft:#E8F0EA;
-  --sbk-border:#E3E1DA;
-  --sbk-shadow:0 10px 30px rgba(37,40,35,.055);
-  --sbk-brand:#3F6B55;
-  --sbk-brand-2:#587D68;
-  --sbk-navy:#252823;
-  --sbk-soft:#F7F5F0;
+  --sbk-text:#14213D;
+  --sbk-muted:#667085;
+  --sbk-green:#2563EB;
+  --sbk-green-dark:#1D4ED8;
+  --sbk-green-soft:#EAF2FF;
+  --sbk-border:#DFE7F2;
+  --sbk-shadow:0 10px 30px rgba(37,99,235,.07);
+  --sbk-brand:#2563EB;
+  --sbk-brand-2:#3B82F6;
+  --sbk-navy:#14213D;
+  --sbk-soft:#F7FAFF;
 }
 html{background:var(--sbk-bg)}
 body{background:var(--sbk-bg)!important;color:var(--sbk-text)!important}
 a{color:var(--sbk-green-dark)}
-::selection{background:#DCE8DF;color:#252823}
-.sbk-global-header,.topbar{background:rgba(247,245,240,.96)!important;border-color:var(--sbk-border)!important}
+::selection{background:#DBEAFE;color:#14213D}
+.sbk-global-header,.topbar{background:rgba(255,255,255,.97)!important;border-color:var(--sbk-border)!important}
 .sbk-global-brand,.brand{color:var(--sbk-text)!important}
 .sbk-global-brand span,.sbk-brandmark .biz{color:var(--sbk-green)!important}
-.sbk-global-links a,.topinner nav a{color:#555C54!important}
+.sbk-global-links a,.topinner nav a{color:#526077!important}
 .sbk-global-links a:hover,.topinner nav a:hover{color:var(--sbk-green-dark)!important}
 .panel,.hero-card,.guide-card,.tool-card,.card,.sbk-flow-card{
   background:var(--sbk-card)!important;border-color:var(--sbk-border)!important;
@@ -34,6 +34,6 @@ h1,h2,h3,h4,strong{color:var(--sbk-text)}
   background-image:none!important
 }
 .btn.primary:hover,.primary:hover,.cta-primary:hover,button.primary:hover{background:var(--sbk-green-dark)!important}
-.sbk-global-footer,.footer{background:#EFEDE7!important;border-color:var(--sbk-border)!important;color:#5E645C!important}
+.sbk-global-footer,.footer{background:#F1F6FD!important;border-color:var(--sbk-border)!important;color:#526077!important}
 input,textarea,select{border-color:var(--sbk-border)!important}
-input:focus,textarea:focus,select:focus{outline:2px solid #BFD0C4!important;outline-offset:1px}
+input:focus,textarea:focus,select:focus{outline:2px solid #93C5FD!important;outline-offset:1px}
