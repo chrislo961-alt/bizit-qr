@@ -116,7 +116,7 @@
     const box=document.createElement('div');
     box.id='sbk-quality-error';
     box.setAttribute('role','status');
-    box.style.cssText='position:fixed;left:16px;right:16px;bottom:16px;z-index:99998;max-width:620px;margin:auto;background:#fff8e8;border:1px solid #ddc98f;border-radius:12px;padding:12px 14px;color:#5d5236;font:13px/1.45 system-ui;box-shadow:0 12px 30px rgba(0,0,0,.08)';
+    box.style.cssText='position:fixed;left:16px;right:16px;bottom:16px;z-index:99998;max-width:620px;margin:auto;background:#f4f8ff;border:1px solid #bfd4ff;border-radius:12px;padding:12px 14px;color:#334a70;font:13px/1.45 system-ui;box-shadow:0 12px 30px rgba(37,99,235,.10)';
     box.innerHTML='<strong>A required tool component did not load.</strong><br>Check your connection and reload the page.<button type="button" aria-label="Close" style="float:right;border:0;background:transparent;font-size:18px;cursor:pointer">×</button>';
     box.querySelector('button').onclick=()=>box.remove();
     document.body.appendChild(box);
@@ -127,10 +127,9 @@
   }
 
   function isRequiredToolDependency(url){
-    // Only immediate, non-fallback dependencies should trigger a global warning.
-    // PDF/DOCX libraries are lazy/fallback-capable and handle their own errors.
-    // Ads/Analytics are commonly blocked and must never look like a broken tool.
-    return /qrcode(?:\.min)?\.js/i.test(url);
+    // Shared analytics should not guess that a tool is broken from one CDN request.
+    // Individual tools own their dependency/fallback handling and user-facing errors.
+    return false;
   }
 
   window.addEventListener('error',function(e){
