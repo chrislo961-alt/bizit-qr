@@ -37,3 +37,13 @@ h1,h2,h3,h4,strong{color:var(--sbk-text)}
 .sbk-global-footer,.footer{background:#F1F6FD!important;border-color:var(--sbk-border)!important;color:#526077!important}
 input,textarea,select{border-color:var(--sbk-border)!important}
 input:focus,textarea:focus,select:focus{outline:2px solid #93C5FD!important;outline-offset:1px}
+
+/* QR generator blue cleanup */
+.hero-icon,.step-no{background:#2563EB!important;color:#fff!important}
+.help-link,.advanced summary,.qr-links a{color:#1D4ED8!important}
+.tab.active,.style-option.active,.size.active{border-color:#79A7F7!important;background:#EEF5FF!important;color:#1D4ED8!important;box-shadow:0 0 0 1px #CFE0FF inset!important}
+.ready{color:#1D4ED8!important;background:#EAF2FF!important}
+.tip{background:#EEF5FF!important;color:#526077!important;border:1px solid #D8E6FF!important}
+.qr-stage{background:#F3F7FD!important;border-color:#DFE7F2!important}
+.qr-links a{background:#F8FBFF!important}
+.style-preview{border-color:#14213D!important}
