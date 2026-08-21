@@ -1,0 +1,109 @@
+name: Temporary SoloBizKit live audit
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install audit tools
+        run: npm install --no-save cheerio@1.0.0 lighthouse@12.8.2 playwright-core@1.55.0
+
+      - name: Audit live SEO, sitemap, endpoints and repository coverage
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import * as cheerio from 'cheerio';
+
+          const BASE='https://solobizkit.it.com';
+          const EXPECTED_PUBLISHER='pub-9212084765206199';
+          const failures=[]; const warnings=[]; const notes=[]; const pages=[];
+          const fail=m=>{failures.push(m);console.log('FAIL:',m)};
+          const warn=m=>{warnings.push(m);console.log('WARN:',m)};
+          const note=m=>{notes.push(m);console.log('NOTE:',m)};
+          const norm=u=>{const x=new URL(u,BASE);x.hash='';if(x.pathname!=='/'&&!x.pathname.endsWith('/'))x.pathname+='/';return x.toString()};
+          async function req(url,opts={}){const r=await fetch(url,{redirect:opts.redirect??'follow',signal:AbortSignal.timeout(opts.timeout??30000),headers:{'user-agent':opts.ua??'Mozilla/5.0 SoloBizKitAudit/1.0',accept:opts.accept??'*/*'}});const t=opts.body===false?'':await r.text();return {r,t}}
+          async function mapLimit(items,limit,worker){let i=0;await Promise.all(Array.from({length:Math.min(limit,Math.max(1,items.length))},async()=>{while(true){const n=i++;if(n>=items.length)return;await worker(items[n],n)}}))}
+
+          console.log('=== redirects ===');
+          for(const source of ['http://solobizkit.it.com/','https://www.solobizkit.it.com/','http://www.solobizkit.it.com/']){
+            try{const {r}=await req(source,{redirect:'manual',body:false});const loc=r.headers.get('location')||'';console.log(source,r.status,loc);if(![301,302,307,308].includes(r.status))fail(`${source} returns ${r.status} instead of redirect`);else if(!loc.startsWith(BASE))fail(`${source} redirects to ${loc}`)}catch(e){fail(`${source}: ${e.message}`)}
+          }
+
+          console.log('=== endpoints ===');
+          const endpoints=['/robots.txt','/sitemap.xml','/ads.txt','/favicon.svg','/favicon.ico','/manifest.webmanifest'];
+          const bodies={};
+          for(const p of endpoints){try{const {r,t}=await req(BASE+p);bodies[p]=t;console.log(p,r.status,r.headers.get('content-type')||'',t.length);if(['/robots.txt','/sitemap.xml','/ads.txt','/favicon.svg'].includes(p)&&r.status!==200)fail(`${p} returned ${r.status}`);if(['/favicon.ico','/manifest.webmanifest'].includes(p)&&r.status!==200)warn(`${p} returned ${r.status}`)}catch(e){warn(`${p}: ${e.message}`)}}
+          const robots=bodies['/robots.txt']||'';if(!/User-agent:\s*\*/i.test(robots))fail('robots missing wildcard user-agent');if(/^\s*Disallow:\s*\/\s*$/im.test(robots))fail('robots blocks whole site');if(!/Sitemap:\s*https:\/\/solobizkit\.it\.com\/sitemap\.xml/i.test(robots))fail('robots missing canonical sitemap');if(/Content-Signal:/i.test(robots))note('Cloudflare Content-Signal present');
+          const ads=bodies['/ads.txt']||'';if(!/google\.com\s*,\s*pub-9212084765206199\s*,\s*DIRECT\s*,\s*f08c47fec0942fa0/i.test(ads))fail('ads.txt missing authorized seller line');
+
+          const sm=bodies['/sitemap.xml']||'';const urls=[...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].trim());console.log('sitemap urls',urls.length);if(!urls.length)fail('empty sitemap');if(new Set(urls).size!==urls.length)fail('duplicate sitemap URLs');
+          const titles=new Map(),descs=new Map(),links=new Set(urls.map(norm));
+          await mapLimit(urls,8,async u=>{try{const {r,t}=await req(u,{accept:'text/html'});const $=cheerio.load(t);const title=$('title').first().text().trim();const desc=$('meta[name="description"]').attr('content')?.trim()||'';const can=$('link[rel="canonical"]').attr('href')||'';const robotsMeta=$('meta[name="robots"]').attr('content')||'';const h1=$('h1').length;const ogTitle=$('meta[property="og:title"]').attr('content')||'';const ogDesc=$('meta[property="og:description"]').attr('content')||'';const jsonld=$('script[type="application/ld+json"]').length;const viewport=$('meta[name="viewport"]').attr('content')||'';const lang=$('html').attr('lang')||'';const textLength=$('body').text().replace(/\s+/g,' ').trim().length;pages.push({u,status:r.status,title,desc,can,robotsMeta,h1,ogTitle,ogDesc,jsonld,viewport,lang,textLength});if(r.status!==200)fail(`${u} returned ${r.status}`);if(!title)fail(`${u} no title`);if(!desc)fail(`${u} no description`);if(!can)fail(`${u} no canonical`);else if(norm(can)!==norm(u))fail(`${u} canonical ${can}`);if(/noindex/i.test(robotsMeta))fail(`${u} noindex in sitemap`);if(h1!==1)fail(`${u} has ${h1} H1`);if(!viewport)fail(`${u} no viewport`);if(!lang)fail(`${u} no html lang`);if(!ogTitle||!ogDesc)warn(`${u} incomplete Open Graph`);if(jsonld===0)warn(`${u} no JSON-LD`);if(title.length>70||title.length<20)warn(`${u} title length ${title.length}`);if(desc.length<70||desc.length>180)warn(`${u} description length ${desc.length}`);if(textLength<350)warn(`${u} thin visible text ${textLength}`);titles.set(title.toLowerCase(),[...(titles.get(title.toLowerCase())||[]),u]);descs.set(desc.toLowerCase(),[...(descs.get(desc.toLowerCase())||[]),u]);$('a[href]').each((_,el)=>{const href=$(el).attr('href');if(!href||/^(mailto:|tel:|javascript:|#)/i.test(href))return;try{const x=new URL(href,u);if(x.hostname==='solobizkit.it.com'&&!/\.(?:png|jpe?g|gif|webp|svg|ico|css|js|xml|txt|pdf|zip)$/i.test(x.pathname))links.add(norm(x))}catch{}});console.log(r.status,u,'h1',h1,'title',title.length,'desc',desc.length,'jsonld',jsonld,'text',textLength)}catch(e){fail(`${u}: ${e.message}`)}});
+          for(const [t,us] of titles)if(t&&us.length>1)fail(`duplicate title ${t} -> ${us.join(', ')}`);
+          for(const [d,us] of descs)if(d&&us.length>1)warn(`duplicate description on ${us.length} pages`);
+
+          console.log('=== repository route coverage ===');
+          function walk(d){return fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>{if(['.git','node_modules'].includes(e.name))return[];const f=path.join(d,e.name);return e.isDirectory()?walk(f):[f]})}
+          const htmlFiles=walk('.').filter(f=>f==='index.html'||f.endsWith(`${path.sep}index.html`));
+          const repoRoutes=htmlFiles.map(f=>f==='index.html'?'/':`/${path.dirname(f).split(path.sep).join('/')}/`);
+          const sitemapPaths=new Set(urls.map(u=>new URL(u).pathname));
+          const repoSet=new Set(repoRoutes);
+          const omitted=[...repoSet].filter(r=>!sitemapPaths.has(r));
+          const missing=[...sitemapPaths].filter(r=>!repoSet.has(r));
+          console.log('html routes',repoSet.size,'sitemap',sitemapPaths.size,'omitted',omitted.length,'missing',missing.length);
+          for(const r of omitted.slice(0,100))console.log('OMITTED',r);
+          for(const r of missing.slice(0,100))console.log('MISSING',r);
+          if(omitted.length)warn(`${omitted.length} committed HTML routes omitted from sitemap`);
+          if(missing.length)fail(`${missing.length} sitemap routes lack matching index.html`);
+
+          console.log('=== internal links ===');
+          let broken=0;await mapLimit([...links],12,async u=>{try{const {r}=await req(u,{body:false,timeout:25000});if(r.status>=400){broken++;fail(`internal ${r.status}: ${u}`)}}catch(e){broken++;fail(`internal failed ${u}: ${e.message}`)}});console.log('internal checked',links.size,'broken',broken);
+
+          console.log('=== headers ===');
+          try{const {r}=await req(BASE+'/',{body:false});for(const h of ['strict-transport-security','x-content-type-options','referrer-policy','permissions-policy','x-frame-options','cache-control']){const v=r.headers.get(h);console.log(h,v||'MISSING');if(!v)warn(`missing ${h}`)}}catch(e){fail(`headers: ${e.message}`)}
+
+          fs.writeFileSync('/tmp/solobizkit-audit.json',JSON.stringify({failures,warnings,notes,sitemapCount:urls.length,pages,omitted,missing},null,2));console.log('SUMMARY',failures.length,warnings.length,notes.length);
+          NODE
+
+      - name: Test representative pages in Chrome
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';import {chromium} from 'playwright-core';
+          const paths=['/','/tools/','/pdf-tools/','/compress-pdf/','/merge-pdf/','/pdf-to-word/','/pdf-to-jpg/','/qr-code-generator/','/invoice-generator/','/profit-margin-calculator/','/hourly-rate-calculator/','/business-name-generator/','/small-business-toolkit/'];
+          const findings=[];const results=[];const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage']});
+          async function inspect(p,w){const ctx=await browser.newContext({viewport:{width:w,height:900}});const page=await ctx.newPage();const consoleMsgs=[];const failed=[];page.on('console',m=>{if(['error','warning'].includes(m.type()))consoleMsgs.push(`${m.type()}: ${m.text()}`)});page.on('pageerror',e=>consoleMsgs.push('pageerror: '+e.message));page.on('requestfailed',r=>failed.push(`${r.failure()?.errorText||'failed'} ${r.url()}`));let resp;try{resp=await page.goto('https://solobizkit.it.com'+p,{waitUntil:'domcontentloaded',timeout:60000});await page.waitForTimeout(3500)}catch(e){findings.push(`${p} ${w}px load ${e.message}`);await ctx.close();return}const state=await page.evaluate(()=>({title:document.title,h1:document.querySelectorAll('h1').length,client:document.documentElement.clientWidth,scroll:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth),mainVisible:!!document.querySelector('main')&&document.querySelector('main').getBoundingClientRect().height>0,text:document.body.innerText.trim().length,adsense:!!document.querySelector('script[src*="pagead2.googlesyndication.com"]')}));console.log(p,w,resp?.status(),JSON.stringify(state),'console',consoleMsgs.length,'failed',failed.length);if(resp?.status()!==200)findings.push(`${p} ${w}px status ${resp?.status()}`);if(state.h1!==1)findings.push(`${p} ${w}px h1 ${state.h1}`);if(state.scroll>state.client+1)findings.push(`${p} ${w}px overflow ${state.scroll-state.client}`);if(!state.mainVisible)findings.push(`${p} ${w}px main invisible`);if(state.text<150)findings.push(`${p} ${w}px thin body ${state.text}`);const fp=failed.filter(x=>/solobizkit\.it\.com/.test(x));if(fp.length)findings.push(`${p} ${w}px first-party failed ${fp.length}`);results.push({p,w,state,consoleMsgs,failed});await ctx.close()}
+          for(const p of paths){await inspect(p,390);await inspect(p,1365)}await browser.close();fs.writeFileSync('/tmp/solobizkit-browser.json',JSON.stringify({findings,results},null,2));console.log('FINDINGS',findings.length);for(const f of findings)console.log('FINDING:',f);
+          NODE
+
+      - name: Verify AdSense crawler visibility
+        run: |
+          for agent in normal mediapartners; do
+            if [ "$agent" = mediapartners ]; then UA='Mediapartners-Google'; else UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/151 Safari/537.36'; fi
+            google-chrome --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --user-agent="$UA" --virtual-time-budget=8000 --dump-dom https://solobizkit.it.com/ > "/tmp/$agent.html" 2> "/tmp/$agent.err" || true
+          done
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';for(const n of ['normal','mediapartners']){const h=fs.readFileSync(`/tmp/${n}.html`,'utf8');console.log(n,'adsense',/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/.test(h),'publisher',/pub-9212084765206199/.test(h),'html',h.length)}
+          NODE
+
+      - name: Lighthouse homepage and core PDF tool
+        run: |
+          for target in home tool; do
+            if [ "$target" = home ]; then URL='https://solobizkit.it.com/'; else URL='https://solobizkit.it.com/compress-pdf/'; fi
+            npx lighthouse "$URL" --output=json --output-path="/tmp/solobizkit-$target.json" --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-gpu --disable-dev-shm-usage" --quiet || true
+          done
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';for(const t of ['home','tool']){const f=`/tmp/solobizkit-${t}.json`;if(!fs.existsSync(f))continue;const r=JSON.parse(fs.readFileSync(f,'utf8'));const s=n=>Math.round((r.categories[n]?.score||0)*100);console.log(t,{performance:s('performance'),accessibility:s('accessibility'),'best-practices':s('best-practices'),seo:s('seo')});for(const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','render-blocking-resources','errors-in-console','robots-txt','is-crawlable','tap-targets']){const a=r.audits[id];if(a)console.log(id,a.score,a.displayValue||a.numericValue||'',JSON.stringify((a.details?.items||[]).slice(0,8)))}}
+          NODE
