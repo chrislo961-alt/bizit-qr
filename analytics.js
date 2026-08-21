@@ -127,8 +127,6 @@
   }
 
   function isRequiredToolDependency(url){
-    // Shared analytics should not guess that a tool is broken from one CDN request.
-    // Individual tools own their dependency/fallback handling and user-facing errors.
     return false;
   }
 
@@ -143,6 +141,27 @@
   },true);
 
   window.addEventListener('unhandledrejection',function(){window.sbkTrack('tool_runtime_error')});
+
+  // PDF compatibility layer: older Acrobat versions can reject PDFs saved with
+  // object streams by pdf-lib. All SoloBizKit tools share this script, so force
+  // classic cross-reference tables regardless of a tool's local save options.
+  function installPdfCompatibility(){
+    const lib=window.PDFLib;
+    if(!lib||!lib.PDFDocument||!lib.PDFDocument.prototype)return false;
+    const proto=lib.PDFDocument.prototype;
+    if(proto.__sbkAcrobatCompatible)return true;
+    const originalSave=proto.save;
+    proto.save=function(options){
+      const safe=Object.assign({},options||{}, {useObjectStreams:false});
+      return originalSave.call(this,safe);
+    };
+    Object.defineProperty(proto,'__sbkAcrobatCompatible',{value:true});
+    return true;
+  }
+  if(!installPdfCompatibility()){
+    document.addEventListener('DOMContentLoaded',installPdfCompatibility,{once:true});
+    window.addEventListener('load',installPdfCompatibility,{once:true});
+  }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',banner);else banner();
 })();
